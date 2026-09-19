@@ -1,0 +1,31 @@
+spark:
+  app:
+    name: DataLoader
+  master:
+    uri: local[*]
+spring:
+  redis:
+    url: redis://2JT9SXNoIxhfgrQrdNF1ZyLejojHU7tg@redis-17388.c74.us-east-1-4.ec2.cloud.redislabs.com:17388
+    timeout: 10000
+  data:
+    elasticsearch:
+      cluster-name: rent
+      cluster-nodes: 8.130.21.36:9300
+
+dubbo:
+  application:
+    name: dubbo-consumer-recommender
+    qos-enable: false
+    qos-port: 33333
+    qos-accept-foreign-ip: false
+  registry:
+    address: zookeeper://8.130.21.36:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: edu.qust.recommender
+  consumer:
+    check: false
+    timeout: 999999
+

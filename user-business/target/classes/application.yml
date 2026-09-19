@@ -1,0 +1,99 @@
+spring:
+  application:
+    name: rent-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/rent?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: password
+  kafka:
+    producer:
+      bootstrap-servers:
+        - 8.130.21.36:9092
+      retries: 3
+      acks: all
+      batch-size: 4096
+      buffer-memory: 4096
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  redis:
+    timeout: 6000
+    url: redis://2JT9SXNoIxhfgrQrdNF1ZyLejojHU7tg@redis-17388.c74.us-east-1-4.ec2.cloud.redislabs.com:17388
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 8.130.21.36:9200
+  session:
+    store-type: redis
+    timeout: 1800
+#  mail:
+#    host: smtp.office365.com
+#    username: kun.simon.ren@outlook.com
+#    password: Rk1225089222
+  mail:
+    host: smtp.qq.com
+    username: 2410252651@qq.com
+    password: xewexnwtooqqeacd
+  aop:
+    proxy-target-class: true
+  http:
+    log-request-details: true
+mail:
+  senderName: rent租赁
+
+server:
+  port: 9999
+
+userBusiness:
+  service:
+    version: 1.0.0
+  security:
+    static-asset-path: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**
+
+dubbo:
+  scan:
+    basePackages: edu.qust.userService.impl
+  application:
+    name: dubbo-provider-user
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    address: zookeeper://8.130.21.36:2181
+  provider:
+    timeout: 9999
+
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  typeEnumsPackage: edu.qust.common.enums
+
+mybatis:
+  mapper-locations: mapper/*.xml
+kaptcha:
+  border: "yes"
+  imageWidth: 100
+  imageHeight: 45
+  sessionKey: code
+  textproducerCharLength: 4
+  textproducerFontSize: 35
+  textproducerFontColor: blue
+  textproducerFontNames: 宋体,楷体,微软雅黑
+
+alipay:
+  appId: 9021000122693035
+  privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCii7jTrIKlGdLm2zeCUtGh03wt4zldE+B4M1saVty60umQXuj/OU0hqbSppomso1IJ8zP1B6eYHyC/olzGnJAsM2xbQ03HIVfDNUdFHjwvNImms+wkLIKQ/LqzHmBYDCnYKzxB+1dIGkvGb5mJeeJt7wjElA4B01ktwsHl2/l6A7AF4PX4AnJbHfdn5Zoc/0QTc6WlD6unq6iW27WP9iMUv0T7WTizW6iksJl3ElmNefYNfoycryHrGwEDx7VShrCZs6zKrTMWPPgN0n69pQ0AI479qQM6NpBrNLy8boBuLIfECQYNvbjm4QijA57N6Kp0k/diw+X1Jjsi6tgyeIYxAgMBAAECggEAQLEBH2WiHVl4wZ5vqjOR8Sj9XDn545x8kvpFgOcfNE+q22War7E7jHFBUN/SHV5m0UT04clpHzcMTpis+fLnwl+4+V2BAAa6KhvzQIP3CgaL3kfvbLo2QMQE/jLRv1kf8kPK2KvSogStMc3KupdC0eP3hl0ycfGOpZLEntn8oV1hujAg8j5n6tnbuy9x4Jpi0hipMR+6xSuOpPzZX+eE802NLABoOCMp4RLbEj2DTyYHKb5Po1rCS2A/K4XA4YdR4NSQ53Z3EJrvlgpiuslfVGKmMPIGCL+329woHfL2CsVMXWTzeyjfe92+MTkmTc146NE73Ey7iqocicWWWfuS7QKBgQDXpSuc5qYn76kI0rfoU5GfwTzDOc3/XttGKHThvrxhbyUMixyqoW38LzP60SVFZ25oiFt42x8/I6O94KVVg4qybGVUvrDwQT85eAhHNWJQX6kS5dRLzab3UBa/eIDe4MGCuda1yMVPDRNv+1cgoSX9rp8MYhLeY0Dlf2oMicZMFwKBgQDA9r06WAEPcyTbX+vqOLnM/TGU5NBaIqaYRSAgsHwCBifdAgewrnsa5x2XWFCG4x/WRQ+rZfxh4Tl2eJU2qXrddnOYAn2njQ7wK3ndf8yfxg9DECnXNOnPWMYRgKHUztwk3MzFR9e2yCxoK4raMHP5AIy/IpED4qzbqUXiwelE9wKBgBUZJ+c1+dO2cwdV9oBYjMrgkR1YrnrpwPJgSu87RhsSUMGlaqyXFrextpg3ljnwILFBhhGQ/sGirwaI0CRJtmw2hsN/1Lfs6k6pG8Y7xt6uPVCIA/lWqZtQzqj1FUa5HrW3kPZAKm3NjbVLFf8vRRRI3W7MuaPgehz6FlobsLcJAoGBAK78UhdhjPyct1S1BLQvYtaw2NCkOwkyGQ9GyF68jIgtWuMBn0WqxHpeEaiYbtYTi2B82jvdTWTZoIl9yhp60K+aZjL4N0jFE0HauzWRWledfWOcecTt+AWPBHcExjy8pkhLbuqMPuNDXXnN2qoIfHLW+8uspgL3AThlpbl/jXF7AoGAWTYcIqpD5QhFPu0Ymzru4i4pbykiqPAKiJu6GF4JgOlPSvM802qoTqsHSdoTnchsX1i0HvU3KAOX5zlRRrNTxW1tYgsMFH47z2r+fPuWaX+pk+aTRaSq+kSBR1WDX8+uYgEGNiskigWHDljnM17PwDFegibNExLwaFIH4XyH6rc=
+  publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1klSE1BRSVkZ6IRlqWEAbzTsMUduQ7ma1vO6KWzK+13PYejx7NWAPiC07A9DLmqg4SvnWsaVNtNW23pxKwZG1cE7s5xWelQwgAulbBzptGEauHmEzRsrn/xSDOPjakg0mCpHSgaZVjs7XYob7kINcxGY4bwN5DA/FPYJehBXJzOiQMHtWeXbe9EyETkoQ2DzGsE3yWz6q0dcqVuoaibplBe3HX3nlXDnLDeum5vIfR58jR8MWc0unFOqLQ2R0I7hpXAV2OZyv3mWz8VmrvmR/phkfFD5GgmPv0a7PBl2Zg5Qr+SV68kXyQohqQMiFnZ87B3fevdh8UOQzT8ak1OdxwIDAQAB
+  returnUrl: http://localhost:9999/items/pay/return
+  gatewayUrL: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+  signType: RSA2
+logging:
+  level:
+    edu:
+      qust:
+        userDao:
+          mapper: info

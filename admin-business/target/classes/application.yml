@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: rental-platform-admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/rent_admin?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: password
+  redis:
+    timeout: 3000
+    database: 1
+  session:
+    store-type: redis
+
+server:
+  port: 9988
+
+
+rent:
+  web:
+    service:
+      version: 1.0.0
+      url: dubbo://localhost:20880
+
+dubbo:
+  application:
+    name: dubbo-consumer-admin
+  registry:
+    address: zookeeper://8.130.21.36:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: edu.qust.adminService
+  consumer:
+    check: false
+
+
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+
+kaptcha:
+  border: "yes"
+  imageWidth: 100
+  imageHeight: 45
+  sessionKey: code
+  textproducerCharLength: 4
+  textproducerFontSize: 35
+  textproducerFontColor: blue
+  textproducerFontNames: 宋体,楷体,微软雅黑
+logging:
+  level:
+    edu:
+      qust:
+        userDao:
+          mapper: info

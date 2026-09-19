@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.qust.userDao.mapper.ItemMapper">
+
+
+    <!--在表连接时筛选效率更高，用户id不为空，if语句为真时才拼接-->
+    <select id="listItemDTO" parameterType="int" resultType="edu.qust.userDao.dto.ItemDTO">
+        select i.id          itemId,
+               s.name        stuffName,
+               i.apply_time  applyTime,
+               i.approval_time approvalTime,
+               i.rent_day    rentDay,
+               i.end_time    endTime,
+               i.status,
+               i.pay_time payTime
+        from item i
+                 inner join stuff s on i.stuff_id = s.id and s.mark = 1
+        where i.mark = 1
+        <if test="userId != null">and i.user_id = #{userId}</if>
+    </select>
+
+    <select id="listCompleteItemDTO" resultType="edu.qust.userDao.dto.ItemDTO">
+        select i.id          itemId,
+               s.name        stuffName,
+               i.apply_time  applyTime,
+               i.approval_time approvalTime,
+               i.pay_time payTime,
+               i.rent_day    rentDay,
+               i.end_time    endTime,
+               i.status,
+               u1.username   renterName,
+               u2.username   ownerName
+        from item i
+                 inner join stuff s on i.stuff_id = s.id and s.mark = 1
+                 inner join user u1 on i.user_id = u1.id and u1.mark = 1
+                 inner join user u2 on s.user_id = u2.id and u2.mark = 1
+        where i.mark = 1
+    </select>
+
+    <select id="listItemDailyStatsDTO" parameterType="edu.qust.userDao.query.ItemDailyStatsQuery"
+            resultType="edu.qust.userDao.dto.ItemDailyStatsDTO">
+        select
+        s.category_id categoryId,
+        i.status,
+        i.add_date addDate,
+        count(*) totalCount,
+        sum(s.deposit) totalDeposit,
+        sum(s.rental) totalRental
+        from item i
+        inner join stuff s on i.stuff_id = s.id and s.mark = 1
+        where i.mark = 1
+        <if test="beginAddDate != null">and i.add_date <![CDATA[ >= ]]> #{beginAddDate}</if>
+        <if test="endAddDate != null">and i.add_date <![CDATA[ <= ]]> #{endAddDate}</if>
+        <if test="categoryId != null">and s.category_id = #{categoryId}</if>
+        <if test="status != null">and i.status = ${status}</if>
+        group by s.category_id, i.add_date, i.status
+    </select>
+</mapper>
