@@ -56,30 +56,106 @@ total = deposit + (daily rental price x rental days)
 - Report rental counts, deposits, and rental totals.
 - Use a WebSocket broadcast chat with online-user counts.
 
+## Technology Stack
+
+| Area | Technology |
+| --- | --- |
+| Language and build | Java 8, Maven multi-module build |
+| Web | Spring Boot 2.1.1, Spring MVC, Thymeleaf |
+| Security | Spring Security, BCrypt, Kaptcha, role-resource rules |
+| Persistence | MySQL, MyBatis-Plus 3.0.6, MyBatis XML mappers, Druid |
+| Search | Spring Data Elasticsearch |
+| Cache and sessions | Redis |
+| RPC | Dubbo 2.6.5 with ZooKeeper |
+| Messaging | Kafka client 0.10.2.1 and Spring Kafka |
+| Recommendation | Apache Spark 2.1.1, Spark SQL, MLlib, Spark Streaming, Scala 2.11.8, JBLAS |
+| Real-time UI | Java WebSocket API |
+| Validation and mapping | Bean Validation, Fluent Validator, Easy Mapper |
+| Payment and mail | Alipay sandbox SDK, Spring Mail |
+
 ## Architecture
 
 ```mermaid
-flowchart LR
-    Browser[User browser] --> UserApp[User application<br/>Spring MVC and Thymeleaf<br/>port 9999]
-    AdminBrowser[Administrator browser] --> AdminApp[Administrator application<br/>Spring MVC and Thymeleaf<br/>port 9988]
+flowchart TB
+    subgraph Clients[Client tier]
+        UserBrowser(["User browser"])
+        AdminBrowser(["Administrator browser"])
+    end
 
-    UserApp --> UserServices[User service layer]
-    UserServices --> UserDAO[MyBatis-Plus and MyBatis]
-    UserDAO --> RentDB[(MySQL rent database)]
-    UserServices --> Search[(Elasticsearch)]
-    UserApp --> Redis[(Redis)]
-    UserApp --> Kafka[(Kafka recommender topic)]
+    subgraph Applications[Application containers]
+        UserApp[["User application<br/>Spring Boot · MVC · Thymeleaf<br/>port 9999"]]
+        AdminApp[["Administrator application<br/>Spring Boot · MVC · Thymeleaf<br/>port 9988"]]
+        Recommender[["Recommendation application<br/>Spring Boot · Spark<br/>batch and streaming jobs"]]
+    end
 
-    AdminApp --> AdminDB[(MySQL rent_admin database)]
-    AdminApp --> Dubbo[Dubbo RPC]
-    Recommender[Spark recommendation application] --> Dubbo
+    subgraph Services[Application and service modules]
+        UserServices("user-service<br/>rental, catalog, account, security")
+        UserDAO("user-dao<br/>MyBatis and Elasticsearch repositories")
+        AdminServices("admin-service and admin-dao")
+        Dubbo("common-interface<br/>Dubbo RPC contracts")
+        SparkEngine("Spark SQL · MLlib · Streaming")
+    end
+
+    subgraph Infrastructure[Data and messaging infrastructure]
+        RentDB[("MySQL<br/>rent database")]
+        AdminDB[("MySQL<br/>rent_admin database")]
+        SearchDB[("Elasticsearch<br/>rentalPlatform index")]
+        Redis{{"Redis<br/>sessions · cache · recommendation lists"}}
+        Kafka[/"Kafka<br/>recommender rating-event topic"/]
+        ZooKeeper(("ZooKeeper<br/>service registry"))
+    end
+
+    subgraph External[External integrations]
+        Alipay("Alipay sandbox")
+        Mail("SMTP mail server")
+    end
+
+    UserBrowser -->|HTTP :9999| UserApp
+    AdminBrowser -->|HTTP :9988| AdminApp
+
+    UserApp --> UserServices
+    UserServices --> UserDAO
+    UserDAO --> RentDB
+    UserDAO --> SearchDB
+    UserApp -->|sessions and verification codes| Redis
+    UserApp -->|publish ratings| Kafka
+    UserApp --> Alipay
+    UserApp --> Mail
+
+    AdminApp --> AdminServices
+    AdminServices --> AdminDB
+    AdminApp -->|consume services| Dubbo
+    Recommender -->|read and write domain data| Dubbo
     Dubbo --> UserServices
-    Dubbo --> ZooKeeper[(ZooKeeper registry)]
 
-    Recommender --> Kafka
-    Recommender --> Redis
-    Recommender --> Spark[Spark SQL, MLlib, and Streaming]
+    UserServices -.->|register providers| ZooKeeper
+    AdminApp -.->|discover providers| ZooKeeper
+    Recommender -.->|discover providers| ZooKeeper
+
+    Recommender --> SparkEngine
+    Kafka -->|consume rating events| Recommender
+    Recommender -->|store rankings and recommendations| Redis
+
+    classDef browser fill:#e8f1ff,stroke:#2563eb,stroke-width:2px,color:#172554
+    classDef application fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#052e16
+    classDef module fill:#f8fafc,stroke:#64748b,stroke-width:1.5px,color:#0f172a
+    classDef database fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#451a03
+    classDef cache fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#450a0a
+    classDef stream fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#3b0764
+    classDef registry fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#082f49
+    classDef external fill:#f1f5f9,stroke:#475569,stroke-dasharray:5 3,color:#0f172a
+
+    class UserBrowser,AdminBrowser browser
+    class UserApp,AdminApp,Recommender application
+    class UserServices,UserDAO,AdminServices,Dubbo,SparkEngine module
+    class RentDB,AdminDB,SearchDB database
+    class Redis cache
+    class Kafka stream
+    class ZooKeeper registry
+    class Alipay,Mail external
 ```
+
+Shape key: stadium = browser, double-bordered rectangle = application container, rounded rectangle = internal module or integration, cylinder = persistent data store, hexagon = Redis cache, parallelogram = Kafka event stream, and circle = ZooKeeper registry.
 
 ### Module responsibilities
 
@@ -342,23 +418,6 @@ This is a server-rendered application, not a versioned public REST API. Several 
 | Recommendations | `GET /recommend/user`, `GET /recommend/product`, `GET /recommend/hot`, `GET /recommend/streaming` |
 | Chat | `GET /chat/index`, WebSocket `/chatServer` |
 | Administration | `/categories/**`, `/items/**`, `/users`, `/chat/**` on port `9988` |
-
-## Technology Stack
-
-| Area | Technology |
-| --- | --- |
-| Language and build | Java 8, Maven multi-module build |
-| Web | Spring Boot 2.1.1, Spring MVC, Thymeleaf |
-| Security | Spring Security, BCrypt, Kaptcha, role-resource rules |
-| Persistence | MySQL, MyBatis-Plus 3.0.6, MyBatis XML mappers, Druid |
-| Search | Spring Data Elasticsearch |
-| Cache and sessions | Redis |
-| RPC | Dubbo 2.6.5 with ZooKeeper |
-| Messaging | Kafka client 0.10.2.1 and Spring Kafka |
-| Recommendation | Apache Spark 2.1.1, Spark SQL, MLlib, Spark Streaming, Scala 2.11.8, JBLAS |
-| Real-time UI | Java WebSocket API |
-| Validation and mapping | Bean Validation, Fluent Validator, Easy Mapper |
-| Payment and mail | Alipay sandbox SDK, Spring Mail |
 
 ## Project Layout
 
