@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import edu.qust.userDao.entity.User;
 
 /**
- * 用户表 Mapper
+ * User table Mapper
  *
  */
 

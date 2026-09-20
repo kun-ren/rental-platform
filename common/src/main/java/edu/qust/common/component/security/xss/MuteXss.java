@@ -3,9 +3,9 @@ package edu.qust.common.component.security.xss;
 import java.lang.annotation.*;
 
 /**
- * 不做XSS防御的方法
+ * Method that bypasses XSS protection
  * <p>
- *     使用‘@Getter(onMethod_={@MuteXss})’方式集成lombok
+ *     Use @Getter(onMethod_={@MuteXss}) with Lombok
  * </p>
  *
  */

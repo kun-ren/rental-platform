@@ -5,7 +5,7 @@ import edu.qust.userDao.entity.Resource;
 
 
 /**
- * 资源 Mapper
+ * Resource mapper
  *
  */
 public interface ResourceMapper extends BaseMapper<Resource> {

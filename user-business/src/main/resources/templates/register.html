@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>注册页面</title>
+    <title>Registration</title>
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
     <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
@@ -13,51 +13,51 @@
 </head>
 <body>
 <!--[if lte IE8]>
-<p>浏览器版本太低，请
-    <a target="_blank" href="http://www.browsehappy.com">升级</a>
-    为最新的ie浏览器！
+<p>Your browser is outdated. Please
+    <a target="_blank" href="http://www.browsehappy.com">upgrade</a>
+    to a current browser version.
 </p>
 <![endif]-->
 <div class="ct-container col-md-12">
     <header class="share-header col-md-12"></header>
     <div class="register-login-content col-md-12">
         <div class="paper-content">
-            <header class="paper-header">注册</header>
+            <header class="paper-header">Register</header>
             <form action="" method="post">
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px">
                         <div class="user-div">
-                            <input name="username" id="username" type="text" placeholder="用户名：5~15个字符，不能有空格"/>
+                            <input name="username" id="username" type="text" placeholder="Username: 5-15 characters with no spaces"/>
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="password-div">
                             <input name="password" id="password" type="password" autocomplete="on"
-                                   placeholder="密码：6~16个字符，首尾不能有空格">
+                                   placeholder="Password: 6-16 characters with no leading or trailing spaces">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="cpassword-div">
                             <input name="cpassword" id="confirmedPassword" autocomplete="on"
-                                   type="password" placeholder="确认密码：请再次填写密码">
+                                   type="password" placeholder="Confirm Password: enter the password again">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <span class="sex-choice"></span>
-                        <div class="sex-div" style="margin-left:20px;" title="男生">
+                        <div class="sex-div" style="margin-left:20px;" title="Male">
                             <span class="sex-logo" index="1"></span>
                             <input name="sex" class="sex-radio" id="sex-female" type="radio" value="1"/>
                             <label for="sex-female"></label>
                         </div>
-                        <div class="sex-div" title="女生">
+                        <div class="sex-div" title="Female">
                             <span class="sex-logo" index="2"></span>
                             <input name="sex" class="sex-radio" id="sex-male" type="radio" value="0"/>
                             <label for="sex-male"></label>
                         </div>
-                        <div class="sex-div" title="保密">
+                        <div class="sex-div" title="Prefer not to say">
                             <span class="sex-logo" index="3"></span>
                             <input name="sex" class="sex-radio" id="sex-secret" type="radio" value="2"
                                    checked="checked"/>
@@ -67,33 +67,33 @@
                     <li>
                         <div class="email-div">
                             <input id="email" name="email" type="text" autocomplete="off"
-                                   placeholder="邮箱：请输入你的邮箱地址">
+                                   placeholder="Email: enter your email address">
                             <button type="button" disabled="disabled"
                                     class="button button-caution button-box button-raised button-giant"
                                     id="codebutton">
-                                <i class="fa">发送</i>
+                                <i class="fa">Send</i>
                             </button>
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="code-div">
-                            <input name="code" type="text" id="emailCaptcha" placeholder="邮箱验证码">
+                            <input name="code" type="text" id="emailCaptcha" placeholder="Email Verification Code">
                         </div>
                         <button type="button" disabled="disabled"
                                 class="button button-caution button-box button-raised button-giant" id="submitbutton">
-                            <i class="fa">注册</i>
+                            <i class="fa">Register</i>
                         </button>
                     </li>
                     <li>
                         <span class="sex-choice"></span>
-                        <div class="role-div" style="margin-left:20px;" title="出租人">
+                        <div class="role-div" style="margin-left:20px;" title="Lessor">
                             <input name="role" class="role-radio" id="role-lessor" type="radio" value="2" checked="checked"/>
-                            <label for="role-lessor">出租人</label>
+                            <label for="role-lessor">Lessor</label>
                         </div>
-                        <div class="role-div" title="承租人">
+                        <div class="role-div" title="Lessee">
                             <input name="role" class="role-radio" id="role-lessee" type="radio" value="3"/>
-                            <label for="role-lessee">承租人</label>
+                            <label for="role-lessee">Lessee</label>
                         </div>
                     </li>
                 </ul>
@@ -102,7 +102,7 @@
     </div>
     <footer class="share-footer col-md-12"></footer>
     <div id="error-box">
-        <p id="error-info">出错了</p>
+        <p id="error-info">An error occurred</p>
     </div>
 </div>
 </body>

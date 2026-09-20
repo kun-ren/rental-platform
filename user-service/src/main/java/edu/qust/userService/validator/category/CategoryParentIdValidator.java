@@ -24,11 +24,11 @@ public class CategoryParentIdValidator extends ValidatorHandler<Integer> impleme
 		if (parentId == 0) {
 			return true;
 		}
-		// 父类别必须存在且不能为三级类别
+		// The parent category must exist and cannot be a level-three category
 		if (categoryService.existsLevelNotEquals(parentId, CategoryLevelEnum.THREE.getCode())) {
 			return true;
 		} else {
-			context.addError(ValidationError.create("父类别非法操作，否则请联系管理员"));
+			context.addError(ValidationError.create("Invalid parent-category operation. Contact an administrator if the problem persists"));
 			return false;
 		}
 	}

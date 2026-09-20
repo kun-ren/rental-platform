@@ -72,7 +72,7 @@ public  class OnlineRecommender implements Serializable {
 
         Broadcast<Map<Integer, Map<Integer, Double>>> simProductMatrixBroadcast = javaSparkContext.broadcast(simProductMatrix);
 
-        //连接kafka
+        //Connect to Kafka
         Map<String,Object> kafkaParam = new HashMap<>();
         kafkaParam.put("bootstrap.servers","8.130.21.36:9092");//TODO
         kafkaParam.put("key.deserializer", StringDeserializer.class);
@@ -90,15 +90,15 @@ public  class OnlineRecommender implements Serializable {
             return new Tuple4<>(Integer.valueOf(attr[0]),
                     Integer.valueOf(attr[1]), Double.valueOf(attr[2]), Integer.valueOf(attr[3]));
         });
-        System.out.println("开始监听");
-        ratingStream.foreachRDD( rdds ->{   // rdds 单次消费消息产生的一组RDD
+        System.out.println("Start listening");
+        ratingStream.foreachRDD( rdds ->{   // rdds An RDD batch produced by one polling interval
             rdds.foreach( rdd ->{
                 System.out.println(" receiving rating data ");
                 Tuple2<Integer, Double>[] userRecentlyRatings = getUserRecentlyRatings(MAX_USER_RATING_NUM, rdd._1());
 
                 int[] candidateProducts = getTopSimProducts(MAX_SIM_PRODUCTS_NUM, rdd._1(), rdd._2(), simProductMatrixBroadcast.getValue());
                 Tuple2<Integer, Double>[] streamRecs = computeProductScore(candidateProducts, userRecentlyRatings, simProductMatrixBroadcast.getValue());
-                //savaDataToMysql(userId, streamRecs);使用redis代替
+                //savaDataToMysql(userId, streamRecs);Use Redis instead
                 List<Integer> ids = Arrays.stream(streamRecs).map(e ->e._1).collect(Collectors.toList());
                 String name = "streamRecs"+ rdd._1().toString();
                 redisTemplate.opsForList().leftPushAll(name,ids);
@@ -112,11 +112,11 @@ public  class OnlineRecommender implements Serializable {
 
     private int[] getTopSimProducts(Integer num, Integer userId, Integer productId, Map<Integer,Map<Integer, Double>> simProducts) {
 
-        //从广播变量相似度矩阵中获得相似度列表
+        //Read similarities from the broadcast similarity matrix
         List<Tuple2<Integer, Double>> allSimProducts = new ArrayList<>();
         simProducts.get(productId).forEach( (k,v) -> allSimProducts.add(new Tuple2<>(k,v)));
 
-        //获取用户已经评分过的商品，过滤掉
+        //Remove products the user has already rated
         List<ProductRating> ratingCollection = productRatingServiceApi.list().stream().map(
                 e -> BeanUtil.map(e, ProductRating.class)
         ).collect(Collectors.toList());
@@ -132,7 +132,7 @@ public  class OnlineRecommender implements Serializable {
     }
 
     private Tuple2<Integer, Double>[] getUserRecentlyRatings(Integer num, Integer userId){
-        //redis    List 键名为uid   值PRODUCTID: SCORE
+        //Redis list key is the user ID and each value is PRODUCT_ID:SCORE
         //String key = "userId"+userId;
         List<String> redisData = redisTemplate.opsForList().range("user:" + userId, 0, num);
         List<Tuple2<Integer, Double>> recentRating = redisData.stream()
@@ -149,15 +149,15 @@ public  class OnlineRecommender implements Serializable {
     private Tuple2<Integer,Double>[] computeProductScore(int[] candidateProducts, Tuple2<Integer, Double>[] userRecentlyRatings, Map<Integer,Map<Integer, Double>> simProducts){
 
         List<Tuple2<Integer, Double>> scores = new ArrayList<>();
-        //两个Map 记录每个商品的高分和低分的计数器productId  -> count
+        //Use two maps to count positive and negative ratings for each product
         Map<Integer, Integer> increMap = new HashMap<>();
         Map<Integer, Integer> decreMap = new HashMap<>();
-        //遍历每个备选商品， 计算和已评分商品的相似度
+        //For every candidate, calculate similarity to the user's rated products
         for(int candidateProduct : candidateProducts){
             for (Tuple2<Integer, Double> userRecentlyRating : userRecentlyRatings){
                 double simScore = getProductsSimScore(candidateProduct, userRecentlyRating._1, simProducts);
                 if(simScore > 0.4){
-                    //按照公式加权叠加
+                    //Accumulate the weighted score
                     scores.add( new Tuple2<>(candidateProduct, simScore * userRecentlyRating._2()));
                     if(userRecentlyRating._2 > 3){
                         increMap.put(candidateProduct, increMap.getOrDefault(candidateProduct,0 )+1);
@@ -167,7 +167,7 @@ public  class OnlineRecommender implements Serializable {
                 }
             }
         }
-        //根据公式计算的所有的推荐优先级，首先按productId分组
+        //Group calculated recommendation scores by product ID
         List<Tuple2<Integer, Double>> score = JavaPairRDD.fromJavaRDD(javaSparkContext.parallelize(scores))
                 .groupByKey()
                 .map(item -> {

@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import edu.qust.common.base.BaseEntity;
 
 /**
- * 角色
+ * Role
  *
  */
 @Data
@@ -17,17 +17,17 @@ import edu.qust.common.base.BaseEntity;
 public class Role extends BaseEntity {
 
     /**
-     * 角色标识符
+     * Role identifier
      */
     private String identifier;
 
     /**
-     * 角色名称
+     * Role name
      */
     private String name;
 
     /**
-     * 角色描述
+     * Role description
      */
     private String description;
 

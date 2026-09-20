@@ -12,7 +12,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class WebSocketConfig {
 
 	/**
-	 * 用于扫描和注册所有携带ServerEndPoint注解的实例。
+	 * Scan and register all instances annotated with ServerEndpoint.
 	 */
 	@Bean
 	public ServerEndpointExporter serverEndpointExporter() {

@@ -33,7 +33,7 @@ public class ALSTrainer {
     @Reference
     private ProductRatingServiceApi productRatingServiceApi;
     public void test(){
-        //数据库加载数据
+        //Load data from the database
         List<ProductRating> ratings = productRatingServiceApi.list().stream().map(
                 e -> BeanUtil.map(e, ProductRating.class)
         ).collect(Collectors.toList());
@@ -82,7 +82,7 @@ public class ALSTrainer {
         JavaRDD<Tuple2<Tuple2<Integer, Integer>, Double>> predictData = predictRating.
                 map(item -> new Tuple2<>(new Tuple2<>(item.user(), item.product()), item.rating()));
         predictData.cache();
-        //实际评分表与预测评分表连接
+        //Join actual ratings with predicted ratings
         Double errs = JavaPairRDD.fromJavaRDD(realData).join(JavaPairRDD.fromJavaRDD(predictData)).mapToDouble(
                 item -> {
                     double err = item._2._1 - item._2._2;

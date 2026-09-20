@@ -3,7 +3,7 @@
 <mapper namespace="edu.qust.userDao.mapper.ItemMapper">
 
 
-    <!--在表连接时筛选效率更高，用户id不为空，if语句为真时才拼接-->
+    <!--Filtering during the join is more efficient; append the condition only when the user ID is present-->
     <select id="listItemDTO" parameterType="int" resultType="edu.qust.userDao.dto.ItemDTO">
         select i.id          itemId,
                s.name        stuffName,

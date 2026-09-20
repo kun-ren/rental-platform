@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 类别管理 controller
+ * Category Management controller
  *
  */
 @Slf4j
@@ -21,7 +21,7 @@ public class CategoryController extends BaseController {
 	private CategoryServiceApi categoryServiceApi;
 
 	/**
-	 * 跳转到类别列表首页
+	 * Open the category-list page
 	 *
 	 * @return page
 	 */
@@ -31,7 +31,7 @@ public class CategoryController extends BaseController {
 	}
 
 	/**
-	 * 获取所有类别信息
+	 * Get all category information
 	 *
 	 * @return Response
 	 */
@@ -42,7 +42,7 @@ public class CategoryController extends BaseController {
 	}
 
 	/**
-	 * 修改类别
+	 * Update a category
 	 * @param id category id
 	 * @param categoryApiParam categoryApiParam
 	 * @return Response
@@ -56,7 +56,7 @@ public class CategoryController extends BaseController {
 	}
 
 	/**
-	 * 删除类别
+	 * Delete a category
 	 * @param id category id
 	 * @return Response
 	 */
@@ -68,7 +68,7 @@ public class CategoryController extends BaseController {
 	}
 
 	/**
-	 * 添加类别
+	 * Add Category
 	 *
 	 * @param categoryApiParam categoryApiParam
 	 * @return Response

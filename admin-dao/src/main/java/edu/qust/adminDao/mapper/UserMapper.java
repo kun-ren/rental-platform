@@ -6,7 +6,7 @@ import edu.qust.adminDao.entity.User;
 import java.util.List;
 
 /**
- * 用户表 Mapper
+ * User table Mapper
  *
  */
 public interface UserMapper extends BaseMapper<User> {

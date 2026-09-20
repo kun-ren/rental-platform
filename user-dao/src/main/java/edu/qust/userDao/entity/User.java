@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 用户表
+ * User table
  *
  */
 @Data
@@ -17,27 +17,27 @@ import lombok.experimental.Accessors;
 public class User extends BaseEntity {
 
     /**
-     * 用户名
+     * Username
      */
     private String username;
 
     /**
-     * 密码
+     * Password
      */
     private String password;
 
     /**
-     * 邮箱
+     * Email
      */
     private String email;
 
     /**
-     * 性别(0:女，1:男，2:不愿透露)
+     * Gender (0: female, 1: male, 2: prefer not to say)
      */
     private Integer sex;
 
     /**
-     * 状态(1:正常,0:锁定)
+     * Status (1: active, 0: locked)
      */
     private Boolean status;
 

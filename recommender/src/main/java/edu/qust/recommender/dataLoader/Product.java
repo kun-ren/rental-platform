@@ -6,8 +6,8 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * Product数据集
- * 商品ID  商品名称   商品分类ID  亚马逊ID   商品图片URL  商品分类   商品用户生成标签
+ * Product data set
+ * Product ID, product name, category IDs, Amazon ID, image URL, categories, and user-generated tags
  *
  *
  */

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 
 /**
- * 响应
+ * Response
  *
  */
 public class Response<T> implements Serializable {
@@ -27,19 +27,19 @@ public class Response<T> implements Serializable {
 	public static final Response FAIL = new Response(CodeEnum.FAIL, DEFAULT_FAIL_MESSAGE);
 
 	/**
-	 * 错误码，0:成功，-1:失败，其他失败
+	 * Result code: 0 for success, -1 for failure, and other values for specific failures
 	 */
 	private CodeEnum code;
 	/**
-	 * 错误信息
+	 * Error message
 	 */
 	private String message;
 	/**
-	 * 错误字段
+	 * Error field
 	 */
 	private String field;
 	/**
-	 * 数据
+	 * Data
 	 */
 	private T data;
 
@@ -101,11 +101,11 @@ public class Response<T> implements Serializable {
 	 */
 	public enum CodeEnum {
 		/**
-		 * 成功
+		 * Success
 		 */
 		SUCCESS(0),
 		/**
-		 * 失败
+		 * Failure
 		 */
 		FAIL(-1);
 		private int value;

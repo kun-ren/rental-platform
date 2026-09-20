@@ -1,21 +1,21 @@
 package edu.qust.userService.validator.category;
 
 /**
- * 类别校验器分组
+ * Category validation groups
  *
 
  */
 public class CategoryValidatorGroup {
 
 	/**
-	 * 添加类别
+	 * Add Category
 	 *
 	 */
 	public interface Add {
 	}
 
 	/**
-	 * 修改类别
+	 * Update a category
 	 */
 	public interface Modify {
 	}

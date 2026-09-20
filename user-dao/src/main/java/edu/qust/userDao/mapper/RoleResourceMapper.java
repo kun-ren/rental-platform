@@ -7,7 +7,7 @@ import edu.qust.userDao.entity.RoleResource;
 import java.util.List;
 
 /**
- * 角色资源关系 Mapper
+ * Role-resource relation Mapper
  *
  */
 public interface RoleResourceMapper extends BaseMapper<RoleResource> {

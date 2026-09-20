@@ -46,7 +46,7 @@ public class ProductRecsServiceApiImpl implements ProductRecsServiceApi, Seriali
     @Override
     public boolean save(List<ProductRecsParam> productRecsParams) {
 
-        //删除旧的推荐列表
+        //Delete old recommendations
         List<ProductRecommendation> productRecommendations = productRecsService.list();
         Map<Integer, List<ProductRecommendation>> map = productRecommendations.stream().collect(Collectors.groupingBy(ProductRecommendation::getParentProductId));
         Set<Integer> parentIds = map.keySet();
@@ -56,7 +56,7 @@ public class ProductRecsServiceApiImpl implements ProductRecsServiceApi, Seriali
             productRecsService.remove(old);
         }
 
-        //存入新的
+        //Store new recommendations
         List<ProductRecommendation> productRecommendationList = new ArrayList<>();
         productRecsParams.forEach( e-> {
             e.getRecs().forEach(rec -> {

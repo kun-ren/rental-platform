@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- * 类别 controller
+ * Category controller
  *
  */
 @Slf4j
@@ -23,7 +23,7 @@ public class CategoryController extends BaseController {
 	private CategoryService categoryService;
 
 	/**
-	 * 获取所有category VO
+	 * Get all category view objects
 	 *
 	 * @return category VO list
 	 */

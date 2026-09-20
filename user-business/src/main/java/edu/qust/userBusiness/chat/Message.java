@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * WebSocket 聊天消息类
+ * WebSocket Chat message
  *
  */
 @AllArgsConstructor
@@ -20,19 +20,19 @@ public class Message {
 	public static final String SPEAK = "SPEAK";
 	public static final String QUIT = "QUIT";
 	/**
-	 * 消息类型
+	 * Message type
 	 */
 	private String type;
 	/**
-	 * 发送人
+	 * Sender
 	 */
 	private String username;
 	/**
-	 * 发送消息
+	 * Send a message
 	 */
 	private String msg;
 	/**
-	 * 在线用户数
+	 * Online user count
 	 */
 	private int onlineCount;
 
@@ -41,7 +41,7 @@ public class Message {
 		try {
 			jsonStr = new ObjectMapper().writeValueAsString(new Message(type, username, msg, onlineTotal));
 		} catch (JsonProcessingException e) {
-			log.error("json序列化错误", e);
+			log.error("JSON serialization error", e);
 		}
 		return jsonStr;
 	}

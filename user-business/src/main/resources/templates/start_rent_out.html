@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>开始出租</title>
+    <title>List an Item</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/plugins/zTree_v3-3.5.33/css/zTreeStyle/zTreeStyle.css}">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
@@ -11,53 +11,53 @@
 </head>
 <body>
 <div class="page-header ">
-    <h2 class="col-sm-offset-4 text-primary"><em>出租物品</em></h2>
+    <h2 class="col-sm-offset-4 text-primary"><em>List an Item</em></h2>
 </div>
 <div class="container">
     <form id="addForm" class="form-horizontal">
         <input type="hidden" id="inputCategoryId" name="categoryId"/>
         <div class="form-group">
-            <label for="inputCategoryName" class="col-sm-2 control-label">类别名称</label>
+            <label for="inputCategoryName" class="col-sm-2 control-label">Category Name</label>
             <div class="col-sm-3">
                 <input id="inputCategoryName" name="categoryName" class="form-control" placeholder="not blank"
                        autofocus required/>
             </div>
-            <button class="btn btn-primary" type="button" id="categorySelectBtn">选择类别</button>
+            <button class="btn btn-primary" type="button" id="categorySelectBtn">Select Category</button>
         </div>
         <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">物品名称</label>
+            <label for="inputName" class="col-sm-2 control-label">Item Name</label>
             <div class="col-sm-3">
                 <input id="inputName" name="name" class="form-control" placeholder="not blank"
                        required/>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputDeposit" class="col-sm-2 control-label">押金</label>
+            <label for="inputDeposit" class="col-sm-2 control-label">Deposit</label>
             <div class="col-sm-3">
                 <input id="inputDeposit" name="deposit" class="form-control" placeholder="not blank"
                        required/>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputRental" class="col-sm-2 control-label">租金(rmb/day)</label>
+            <label for="inputRental" class="col-sm-2 control-label">Rental (RMB/day)</label>
             <div class="col-sm-3">
                 <input id="inputRental" name="rental" class="form-control" placeholder="not blank"
                        required/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">状态</label>
+            <label class="col-sm-2 control-label">Status</label>
             <div class="radio col-sm-3">
                 <label class="radio-inline">
-                    <input type="radio" id="inputStatus1" name="status" value="0" checked>出租
+                    <input type="radio" id="inputStatus1" name="status" value="0" checked>Available for Rent
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" id="inputStatus2" name="status" value="3">不出租
+                    <input type="radio" id="inputStatus2" name="status" value="3">Not Offered
                 </label>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputDescription" class="col-sm-2 control-label">物品描述</label>
+            <label for="inputDescription" class="col-sm-2 control-label">Item description</label>
             <div class="col-sm-4">
                 <textarea id="inputDescription" name="description" class="form-control" cols="30" rows="10"
                           required></textarea>
@@ -65,10 +65,10 @@
         </div>
         <div class="row">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" id="addBtn">添加</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" id="addBtn">Add</button>
             </div>
             <div class="col-sm-2">
-                <button type="reset" class="btn btn-danger btn-lg btn-block">重置</button>
+                <button type="reset" class="btn btn-danger btn-lg btn-block">Reset</button>
             </div>
         </div>
     </form>
@@ -81,7 +81,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h4 class="modal-title">选择类别</h4>
+                <h4 class="modal-title">Select Category</h4>
             </div>
             <div class="modal-body">
                 <ul id="categorySelectTreeBlock" class="ztree">
@@ -99,13 +99,13 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h4 class="modal-title">信息</h4>
+                <h4 class="modal-title">Information</h4>
             </div>
             <div class="modal-body">
                 <h5><span id="hintContent"></span></h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
             </div>
         </div>
     </div>

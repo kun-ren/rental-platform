@@ -1,7 +1,7 @@
 package edu.qust.common.exception;
 
 /**
- * 必须要处理的业务异常
+ * Business exception that must be handled
  *
  */
 public abstract class BusinessException extends RuntimeException {

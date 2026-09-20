@@ -13,7 +13,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * 聊天控制器
+ * Chat controller
  *
  */
 @Slf4j
@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
 public class ChatController {
 
 	/**
-	 * 进入聊天界面
+	 * Open the chat page
 	 */
 	@GetMapping("/index")
 	public String index(HttpServletRequest request, Model model) throws UnknownHostException {

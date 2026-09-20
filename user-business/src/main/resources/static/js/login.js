@@ -24,10 +24,10 @@ window.onload = function () {
                 functions.showRightSpanAndHideMessage(this);
                 usernameValid = true;
             } else {
-                functions.showWrongSpanAndMessage(this, "请填写账户名");
+                functions.showWrongSpanAndMessage(this, "Enter your username");
                 usernameValid = false;
             }
-            // 记住密码时
+            // When Remember Password is enabled
             if(isPasswordValid(passwordObject.value)) {
                 functions.showRightSpanAndHideMessage(passwordObject);
                 passwordValid = true;
@@ -54,7 +54,7 @@ window.onload = function () {
                 functions.showRightSpanAndHideMessage(functions.aInputs[2]);
                 passwordValid = true;
             } else {
-                functions.showWrongSpanAndMessage(this, "请输入密码");
+                functions.showWrongSpanAndMessage(this, "Enter your password");
                 passwordValid = false;
             }
             checkLoginButton();
@@ -76,10 +76,10 @@ window.onload = function () {
             functions.focusInputBack(this, "-975px 0px");
             var thisValue = this.value;
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "请输入验证码");
+                functions.showWrongSpanAndMessage(this, "Enter the CAPTCHA");
                 captchaValid = false;
             } else if (thisValue.length !== 4) {
-                functions.showWrongSpanAndMessage(this, "验证码长度应该为4位");
+                functions.showWrongSpanAndMessage(this, "The CAPTCHA must contain four characters");
                 captchaValid = false;
             } else {
                 functions.showRightSpanAndHideMessage(this);
@@ -117,7 +117,7 @@ window.onload = function () {
 
     retrieveCaptcha();
 
-    // 获取验证码
+    // Load the CAPTCHA
     function retrieveCaptcha() {
         $.ajax('/captcha', {
             type: 'GET',

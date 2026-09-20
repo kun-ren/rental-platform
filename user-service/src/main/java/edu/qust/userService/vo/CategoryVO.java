@@ -20,22 +20,22 @@ public class CategoryVO extends BaseVO {
 	private Integer id;
 
 	/**
-	 * 类别名称
+	 * Category Name
 	 */
 	private String name;
 
 	/**
-	 * 类别描述
+	 * Category Description
 	 */
 	private String description;
 
 	/**
-	 * 父类别编号（0代表是根类别）
+	 * Parent category ID (0 identifies a root category)
 	 */
 	private Integer parentId;
 
 	/**
-	 *  类别层次（只能为1或2或3）
+	 *  Category level (must be 1, 2, or 3)
 	 */
 	private Integer level;
 }

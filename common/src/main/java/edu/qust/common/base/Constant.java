@@ -1,13 +1,13 @@
 package edu.qust.common.base;
 
 /**
- * 常量类
+ * Constants
  *
  */
 public interface Constant {
 
 	/**
-	 * 分隔符
+	 * Separators
 	 *
 	 */
 	interface Separator {
@@ -26,15 +26,15 @@ public interface Constant {
 	}
 
 	/**
-	 * 错误信息
+	 * Error message
 	 *
 	 */
 	interface ErrorMsg {
-		String SYSTEM_INTERNAL_ERROR = "系统内部错误";
+		String SYSTEM_INTERNAL_ERROR = "Internal system error";
 	}
 
 	/**
-	 * 图片验证码
+	 * Image CAPTCHA
 	 *
 	 */
 	interface Captcha {

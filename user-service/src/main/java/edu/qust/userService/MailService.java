@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 
 /**
- * 邮件服务
+ * Email service
  *
  */
 @Slf4j
@@ -28,7 +28,7 @@ public class MailService {
 	private String senderName;
 
 	/**
-	 * 同步发送邮件
+	 * Send email synchronously
 	 *
 	 * @param toAddr  to address
 	 * @param subject subject
@@ -45,14 +45,14 @@ public class MailService {
 			helper.setText(content, true);
 			javaMailSender.send(message);
 		} catch (UnsupportedEncodingException | MessagingException e) {
-			log.error("邮件发送异常", e);
+			log.error("Email delivery failed", e);
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * 异步发送邮件
+	 * Send email asynchronously
 	 *
 	 * @param toAddr  to address
 	 * @param subject subject

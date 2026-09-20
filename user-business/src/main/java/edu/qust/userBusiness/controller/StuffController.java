@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * 物品 controller
+ * Item controller
  *
  */
 @Slf4j
@@ -43,12 +43,12 @@ public class StuffController extends WebBaseController {
 	private CategoryService categoryService;
 
 	/**
-	 * 开始租用
+	 * Start Renting
 	 *
 	 * <pre>
-	 *     "不出租"的不显示
-	 *     "已租"的显示应还日期
-	 *     "未租"的显示租用操作
+	 *     Hide items marked "Not Offered"
+	 *     Show the expected return date for rented items
+	 *     Show the rent action for available items
 	 * </pre>
 	 *
 	 * @return JSON
@@ -67,7 +67,7 @@ public class StuffController extends WebBaseController {
 		return "start_rent_in";
 	}
 	/**
-	 * 开始出租
+	 * List an Item
 	 *
 	 * @return page
 	 */
@@ -77,10 +77,10 @@ public class StuffController extends WebBaseController {
 	}
 
 	/**
-	 * 我的出租
+	 * My Listings
 	 *
 	 * <pre>
-	 *     "未租"的显示取消出租
+	 *     Show the stop-listing action for available items
 	 * </pre>
 	 *
 	 * @return page
@@ -99,7 +99,7 @@ public class StuffController extends WebBaseController {
 	}
 
 	/**
-	 * 开始出租提交
+	 * Submit a new listing
 	 *
 	 * @param stuffParam stuffParam
 	 * @return Response
@@ -110,12 +110,12 @@ public class StuffController extends WebBaseController {
 	@EnableSensitive
 	public Response addRentOut(@RequestBody StuffParam stuffParam, HttpSession session) {
 		stuffParam.setUserId(currentUserId(session));
-		log.info("开始出租提交stuffParam: {}", stuffParam);
+		log.info("Submit a new listingstuffParam: {}", stuffParam);
 		return stuffService.add(stuffParam);
 	}
 
 	/**
-	 * 取消出租
+	 * Stop Listing
 	 *
 	 * @param id stuff id
 	 * @return Response
@@ -127,7 +127,7 @@ public class StuffController extends WebBaseController {
 	}
 
 	/**
-	 * 租用
+	 * Rent
 	 *
 	 * @param id stuff id
 	 * @param rentDay rent day
@@ -140,7 +140,7 @@ public class StuffController extends WebBaseController {
 	}
 
 	/**
-	 * 跳转到搜索页面
+	 * Open the search page
 	 *
 	 * @param model                model
 	 * @param stuffSearchVoListStr stuffSearchVoListStr
@@ -157,7 +157,7 @@ public class StuffController extends WebBaseController {
 	}
 
 	/**
-	 * 搜索
+	 * Search
 	 *
 	 * @param categoryId         categoryId
 	 * @param name               name

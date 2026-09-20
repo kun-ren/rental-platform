@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * 出租项
+ * Rental record
  *
  */
 @Data
@@ -20,47 +20,47 @@ import java.time.LocalDateTime;
 public class Item extends BaseEntity {
 
     /**
-     * 租用者ID
+     * Renter ID
      */
     private Integer userId;
 
     /**
-     * 物品编号
+     * Item ID
      */
     private Integer stuffId;
 
     /**
-     * 审批时间
+     * Approval Time
      */
     private LocalDateTime approvalTime;
 
     /**
-     * 支付时间
+     * Payment Time
      */
     private LocalDateTime payTime;
 
     /**
-     * 租用天数
+     * Rental Days
      */
     private Integer rentDay;
 
     /**
-     * 归还时间
+     * Return Time
      */
     private LocalDateTime endTime;
 
     /**
-     * 申请时间
+     * Application Time
      */
     private LocalDateTime applyTime;
 
     /**
-     * 状态（0：申请中；1：不通过；2:待支付；3：租用中；4： 已归还）
+     * Status (0: applying; 1: rejected; 2: awaiting payment; 3: renting; 4: returned)
      */
     private Integer status;
 
     /**
-     * 添加日期
+     * Creation date
      */
     private LocalDate addDate;
 

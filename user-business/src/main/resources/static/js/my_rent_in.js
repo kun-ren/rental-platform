@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    //确认删除区域
+    //Deletion confirmation area
     var deleteConfirmBlock = $("#deleteConfirm");
     var singleCheckBoxes = $(".single-checkbox");
     var selectAllCheckBox = $("#selectAllCheckBox");
     var multiDeleteBtn = $("#multiDeleteBtn");
     var dropdownMenu1 = $("#dropdownMenu1");
 
-    //显示确认删除警告框
+    //Show the deletion confirmation dialog
     $(".btn-single-delete").click(function () {
         deleteConfirmBlock.slideDown();
     });
@@ -22,25 +22,25 @@ $(document).ready(function () {
         }
     });
 
-    //隐藏确认删除警告框
+    //Hide the deletion confirmation dialog
     deleteConfirmBlock.find("button").click(function () {
         deleteConfirmBlock.hide(500);
     });
 
-    //点击确认删除后的操作
+    //Handle deletion confirmation
     deleteConfirmBlock.find(".confirm").click(function () {
         // delete the selected item
     });
 
     var pageNumBtns = $(".pagination .number");
 
-    //切换页码中的高亮页
+    //Update the highlighted page number
     pageNumBtns.click(function () {
         pageNumBtns.removeClass("active");
         $(this).addClass("active");
     });
 
-    //前一页的操作
+    //Go to the previous page
     $(".pagination .previous").click(function () {
         var activePageObject = $(".pagination .active");
         var pageNum = parseInt(activePageObject.text());
@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     });
 
-    //后一页的操作
+    //Go to the next page
     $(".pagination .next").click(function () {
         var activePageObject = $(".pagination .active");
         var pageNum = parseInt(activePageObject.text());
@@ -74,13 +74,13 @@ $(document).ready(function () {
         });
     });
 
-    //表头内容数组
+    //Table-header labels
     var thsText = [];
     $("table").find("th").each(function () {
         thsText.push($(this).text());
     });
 
-    //显示表格一条的具体信息
+    //Show one table row's details
     $(".detail").parents("td").click(function () {
         $(this).find("span").toggleClass("glyphicon-plus glyphicon-minus");
 
@@ -170,7 +170,7 @@ $(document).ready(function () {
     const hintContent = $('#hintContent');
     const hintModalHeader = hintModal.find('.modal-header');
     const hintModalBody = hintModal.find('.modal-body');
-    // 显示提示框
+    // Show the notification dialog
     function showHintModal(message, success) {
         if (success) {
             hintModalHeader.attr('class', 'modal-header bg-success');
@@ -192,20 +192,20 @@ $(document).ready(function () {
                 if (data.code === RESPONSE_CODE.SUCCESS) {
                     window.location.reload(true);
                 } else {
-                    showHintModal(data.message + ', 取消申请失败', false);
+                    showHintModal(data.message + ', Failed to cancel the application', false);
                 }
             }
         });
     });
 
-    //评分
+    //Rating
     let itemId = 0;
     $(".ratingBtn").click(function () {
-        console.log("点击事件");
+        console.log("Click event");
         itemId = $(this).parents('tr').find('input[name="inputItemId"]').val();
     });
     $("#ratingSubmitBtn").click(function () {
-        console.log("发送请求");
+        console.log("Send request");
          $.ajax(`/rating/${itemId}`,{
              data:{
                  score: $('#inputScore').val()
@@ -214,9 +214,9 @@ $(document).ready(function () {
              dataType: DATA_TYPE.JSON,
              success: function (data) {
                  if(data.code === RESPONSE_CODE.SUCCESS) {
-                     showHintModal('评分成功',false)
+                     showHintModal('Rating submitted successfully',false)
                  } else {
-                     showHintModal(data.message + ',评分失败',false);
+                     showHintModal(data.message + ',Failed to submit the rating',false);
                  }
              }
          })
@@ -239,7 +239,7 @@ $(document).ready(function () {
                 if (data.code === RESPONSE_CODE.SUCCESS) {
                     replaceContent(data.data);
                 } else {
-                    showHintModal(data.message + ', 支付失败', false);
+                    showHintModal(data.message + ', Payment failed', false);
                 }
             }
         });

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.ServiceLoader;
 
 /**
- * 告警服务
+ * Alert service
  *
  */
 @Service
@@ -13,9 +13,9 @@ public class AlarmService {
 	private ServiceLoader<AlarmApi> loader = ServiceLoader.load(AlarmApi.class);
 
 	/**
-	 * 发送告警
+	 * Send an alert
 	 *
-	 * @param content 告警内容
+	 * @param content Alert content
 	 */
 	public void alarm(String content) {
 		for (AlarmApi alarmApi : loader) {

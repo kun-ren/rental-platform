@@ -30,7 +30,7 @@ import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex;
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
 
 /**
- * 注册控制器
+ * Registration controller
  *
  */
 @Slf4j
@@ -50,7 +50,7 @@ public class RegisterController extends BaseController {
 	private StringRedisTemplate stringRedisTemplate;
 
 	/**
-	 * 跳转到“注册页面”
+	 * Open the registration page
 	 *
 	 * @return page
 	 */
@@ -60,7 +60,7 @@ public class RegisterController extends BaseController {
 	}
 
 	/**
-	 * 提交注册请求
+	 * Submit a registration request
 	 *
 	 * @param registerParam register Param
 	 * @param session       session
@@ -70,13 +70,13 @@ public class RegisterController extends BaseController {
 	@ResponseBody
 	public Response register(@RequestBody RegisterParam registerParam, HttpSession session) {
 		log.info("get registerParam: {}", registerParam);
-		//数据验证,(返回结果)
+		//Data validation,(return the result)
 		ComplexResult result = FluentValidator.checkAll(AuthValidatorGroup.Register.class)
 				.failFast()
 				.on(registerParam.getEmailCaptcha(), new ValidatorHandler<String>() {
 					@Override
 					public boolean validate(ValidatorContext context, String inputEmailCaptcha) {
-						String errorMsg = "验证码错误，请检查邮箱地址或点击重新发送";
+						String errorMsg = "The verification code is incorrect. Check the email address or send a new code";
 						if (inputEmailCaptcha == null) {
 							context.addError(ValidationError.create(errorMsg).setField("emailCaptcha"));
 							return false;
@@ -97,7 +97,7 @@ public class RegisterController extends BaseController {
 					@Override
 					public boolean validate(ValidatorContext context, String username) {
 						if (inMemoryUserDetailsManager.userExists(username)) {
-							context.addError(ValidationError.create("该用户名已有人使用").setField("username"));
+							context.addError(ValidationError.create("This username is already in use").setField("username"));
 							return false;
 						}
 						return true;
@@ -107,7 +107,7 @@ public class RegisterController extends BaseController {
 					@Override
 					public boolean validate(ValidatorContext context, String email) {
 						if (userService.existsEmail(email)) {
-							context.addError(ValidationError.create("该邮箱已有人使用").setField("email"));
+							context.addError(ValidationError.create("This email address is already in use").setField("email"));
 							return false;
 						}
 						return true;
@@ -124,7 +124,7 @@ public class RegisterController extends BaseController {
 			}
 		}
 		if (!registerParam.getPassword().equals(registerParam.getConfirmedPassword())) {
-			return Response.fail("两个密码不匹配", "password");
+			return Response.fail("The passwords do not match", "password");
 		}
 		// save user
 		userService.save(getUserFrom(registerParam), registerParam.getRole());
@@ -149,7 +149,7 @@ public class RegisterController extends BaseController {
 	}
 
 	/**
-	 * 发送邮件验证码
+	 * Send an email verification code
 	 *
 	 * @param email email
 	 * @return Response
@@ -166,20 +166,20 @@ public class RegisterController extends BaseController {
 			return Response.fail(Iterables.getFirst(result.getErrors(), StringUtils.EMPTY));
 		}
 		if (userService.existsEmail(email)) {
-			return Response.fail("该邮箱已有人使用");
+			return Response.fail("This email address is already in use");
 		}
 		String captcha = StringUtil.randomString(6);
-		//保存到redis，内存中sessionID+email对应一个邮件验证码，防止验证码正确而换了邮箱
+		//Store one email code per session ID and address in Redis so a valid code cannot be reused with another address
 		log.info(captcha);
 		String redisKey = this.getEmailCaptchaRedisKey(session, email);
 		stringRedisTemplate.opsForValue().set(redisKey, captcha);
 		stringRedisTemplate.expire(redisKey, 2, TimeUnit.MINUTES);
-		// 渲染邮件模板
+		// Render the email template
 		Context context = new Context();
 		context.setVariable("captcha", captcha);
 		String emailContent = templateEngine.process("mail/email_captcha", context);
-		// 发送邮件
-		mailService.sendEmailAsync(email, StringUtil.format("{}是您在rent-X的注册验证码", captcha), emailContent);
+		// Send the email
+		mailService.sendEmailAsync(email, StringUtil.format("{} is your rent-X registration verification code", captcha), emailContent);
 		return Response.SUCCESS;
 	}
 
@@ -195,7 +195,7 @@ public class RegisterController extends BaseController {
 	}
 
 	/**
-	 * 检查用户名是否已经存在
+	 * Check whether the username already exists
 	 *
 	 * @param username username
 	 * @return response
@@ -204,7 +204,7 @@ public class RegisterController extends BaseController {
 	@ResponseBody
 	public Response checkUsernameExist(@PathVariable String username) {
 		if (inMemoryUserDetailsManager.userExists(username)) {
-			return Response.fail("该用户名已有人使用");
+			return Response.fail("This username is already in use");
 		}
 		return Response.SUCCESS;
 	}

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 验证码校验过滤器
+ * CAPTCHA validation filter
  *
  */
 @Slf4j
@@ -27,7 +27,7 @@ import java.io.IOException;
 public class CaptchaValidationFilter extends OncePerRequestFilter {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
-	private static final String CAPTCHA_ERROR_MESSAGE = "验证码校验失败";
+	private static final String CAPTCHA_ERROR_MESSAGE = "CAPTCHA validation failed";
 	private AuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler("/captcha/error");
 
 
@@ -52,7 +52,7 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
 		}
 		String inputCaptcha = request.getParameter("captcha");
 		if (StringUtils.isBlank(inputCaptcha)) {
-			throw new CaptchaValidationException("验证码不能为空");
+			throw new CaptchaValidationException("The CAPTCHA is required");
 		}
 		String redisKey = Constants.KAPTCHA_SESSION_KEY + Constant.Separator.MINUS + uuidHeader;
 		String realCaptcha =
@@ -61,7 +61,7 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
 			throw new CaptchaValidationException(CAPTCHA_ERROR_MESSAGE);
 		}
 		if (!realCaptcha.equalsIgnoreCase(inputCaptcha)) {
-			throw new CaptchaValidationException("验证码不正确");
+			throw new CaptchaValidationException("The CAPTCHA is incorrect");
 		}
 		stringRedisTemplate.delete(redisKey);
 	}

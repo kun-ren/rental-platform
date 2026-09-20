@@ -7,7 +7,7 @@ import edu.qust.userDao.entity.UserRole;
 import java.util.List;
 
 /**
- * 用户角色关系 Mapper
+ * User-role relation Mapper
  *
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {

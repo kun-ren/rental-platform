@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 认证成功处理器
+ * Authentication success handler
  *
  */
 @Component
@@ -74,7 +74,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 				return;
 			}
 		}
-		// 将用户菜单保存到session
+		// Store the user's menus in the session
 		request.getSession().setAttribute(WebConstant.Session.MENU_VO_LIST_SESSION_KEY, menuService.listMenuVO(roleIdSet));
 		request.getSession().setAttribute(WebConstant.Session.CURRENT_USER_ID_SESSION_KEY,
 				userService.getUserIdByName(authentication.getName()));

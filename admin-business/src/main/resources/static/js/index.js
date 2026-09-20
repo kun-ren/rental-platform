@@ -1,16 +1,16 @@
 $(document).ready(function () {
-    //切换左侧导航栏+/-图标
+    //Toggle the left navigation expand/collapse icon
     $(".nav-sidebar-head .nav li a").click(function () {
         $(this).children().toggleClass("glyphicon-plus glyphicon-minus");
     });
 
     var sidebarBodyLi = $(".nav-sidebar-body .nav li");
     sidebarBodyLi.click(function () {
-        //切换左侧导航栏的选中栏
+        //Update the selected left-navigation item
         sidebarBodyLi.not(this).removeClass("active");
     });
 
-    // 动态创建iframe
+    // Create the iframe dynamically
     var mainContent = $("#mainContent");
     var contentInMainContent = '';
     $(".nav-sidebar-body .nav li a").each(function () {
@@ -25,7 +25,7 @@ $(document).ready(function () {
     mainContent.html(contentInMainContent);
     mainContent.find("div").first().addClass("active in");
 
-    // iframe高度自适应
+    // Automatically size the iframe height
     $(".main-iframe").on("load", function () {
         $(this).height($(window).height() - 55);
     });

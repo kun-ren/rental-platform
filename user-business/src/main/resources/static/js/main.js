@@ -4,9 +4,9 @@ functions.oErrorinfo = document.getElementById("error-info");
 functions.oErrorbox = document.getElementById("error-box");
 functions.aInputs = functions.oFormplace.getElementsByTagName("input");
 
-// 检查字符串是否是邮箱
+// Check whether a string is an email address
 functions.checkEmailFormat = function (strEmail) {
-    //声明邮箱正则
+    //Define the email regular expression
     var emailRegex = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     if (!emailRegex.test(strEmail)) {
         console.log("invalid email");
@@ -15,7 +15,7 @@ functions.checkEmailFormat = function (strEmail) {
     return true;
 };
 
-//显示正确图标
+//Show the success icon
 functions.showRightSpan = function (obj) {
     var oSpan = obj.parentNode.parentNode.getElementsByTagName("span")[0];
     if (oSpan) {
@@ -23,7 +23,7 @@ functions.showRightSpan = function (obj) {
     }
 };
 
-//显示错误图标
+//Show the error icon
 functions.showWrongSpan = function (obj) {
     var oSpan = obj.parentNode.parentNode.getElementsByTagName("span")[0];
     if (oSpan) {
@@ -48,19 +48,19 @@ functions.resetOutline = function (obj) {
     obj.style['box-shadow'] = "none";
 };
 
-// 设置消息
+// Set the message
 functions.setMessage = function (str) {
     functions.oErrorinfo.innerHTML = str;
 };
 
-//显示消息
+//Show the message
 functions.showMessageBox = function (obj) {
     var tempLeft = 0;
     var tempTop = 0;
 
-    while (obj != undefined) {//等效 obj = obj.offsetParent;while (obj != undefined)
-        tempLeft += obj.offsetLeft; //叠加父容器的上边距
-        tempTop += obj.offsetTop; //叠加父容器的左边距
+    while (obj != undefined) {//Equivalent to assigning obj = obj.offsetParent in the loop
+        tempLeft += obj.offsetLeft; //Accumulate the parent container's left offset
+        tempTop += obj.offsetTop; //Accumulate the parent container's top offset
         obj = obj.offsetParent;
     }
     functions.oErrorbox.style['left'] = tempLeft + 320 + "px";
@@ -69,7 +69,7 @@ functions.showMessageBox = function (obj) {
     functions.oErrorinfo.style['display'] = "block";
 };
 
-//隐藏消息
+//Hide the message
 functions.hideMessageBox = function () {
     functions.oErrorbox.style['display'] = "none";
     functions.oErrorinfo.style['display'] = "none";
@@ -84,14 +84,14 @@ functions.blurInputBack = function (obj, str) {
     obj.parentNode.style['background-position'] = str;
 };
 
-// 显示正确图标并且隐藏消息
+// Show the success icon and hide the message
 functions.showRightSpanAndHideMessage = function (obj) {
     functions.showRightSpan(obj);
     functions.resetOutline(obj);
     functions.hideMessageBox(obj);
 };
 
-// 显示正确图标和消息
+// Show the success icon and message
 functions.showRightSpanAndMessage = function (obj, str) {
     functions.showRightSpan(obj);
     functions.changeOutline(obj);
@@ -99,7 +99,7 @@ functions.showRightSpanAndMessage = function (obj, str) {
     functions.showMessageBox(obj);
 };
 
-// 显示错误图标和消息
+// Show the error icon and message
 functions.showWrongSpanAndMessage = function (obj, str) {
     functions.showWrongSpan(obj);
     functions.changeOutline(obj);

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * 租用物品VO
+ * Rental item view object
  *
  */
 @EqualsAndHashCode(callSuper = true)
@@ -19,32 +19,32 @@ import java.time.LocalDate;
 public class StuffOutVO extends BaseVO {
 	private Integer id;
 	/**
-	 * 类别名称
+	 * Category Name
 	 */
 	private String categoryName;
 	/**
-	 * 物品名称
+	 * Item Name
 	 */
 	private String stuffName;
 	/**
-	 * 租用者名称
+	 * Renter name
 	 */
 	private String renterName;
 	/**
-	 * 押金(rmb)
+	 * Deposit(rmb)
 	 */
 	private BigDecimal deposit;
 
 	/**
-	 * 租金（rmb/day）
+	 * Rental (RMB/day)
 	 */
 	private BigDecimal rental;
 	/**
-	 * 物品状态（0:未租；1:申请租用；2:已租;3:不出租）
+	 * Item status (0: available; 1: application pending; 2: rented; 3: not offered)
 	 */
 	private StuffStatusEnum status;
 	/**
-	 * 应还日期
+	 * Expected Return Date
 	 */
 		private LocalDate shouldReturnDate;
 }

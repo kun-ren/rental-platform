@@ -5,26 +5,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 物品状态枚举
+ * Item availability enum
  *
  */
 public enum StuffStatusEnum {
 	/**
-	 * 不出租
+	 * Not Offered
 	 */
-	NOT(3, "不出租"),
+	NOT(3, "Not Offered"),
 	/**
-	 * 未租
+	 * Available
 	 */
-	HAVE_NOT(0, "未租"),
+	HAVE_NOT(0, "Available"),
 	/**
-	 * 申请租用
+	 * Application Pending
 	 */
-	APPLY(1, "申请租用"),
+	APPLY(1, "Application Pending"),
 	/**
-	 * 已租
+	 * Rented
 	 */
-	ALREADY(2, "已租");
+	ALREADY(2, "Rented");
 
 	private int code;
 	private String name;

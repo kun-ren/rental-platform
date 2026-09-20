@@ -10,23 +10,23 @@
 <body>
 <div class="container">
     <div class="page-header text-center">
-        <h2 class="text-primary"><em>搜索</em></h2>
+        <h2 class="text-primary"><em>Search</em></h2>
     </div>
     <div class="btn-group">
         <form th:action="@{/stuffs/search}" th:method="post">
-            <label for="inputName">物品名称：</label><input name="name" th:value="${nameCondition}" id="inputName"/>
-            <label for="inputDesc">物品描述：</label><input name="desc" th:value="${descCondition}" id="inputDesc"/>
-            <label for="categorySelect">类别：</label>
+            <label for="inputName">Item Name：</label><input name="name" th:value="${nameCondition}" id="inputName"/>
+            <label for="inputDesc">Item description：</label><input name="desc" th:value="${descCondition}" id="inputDesc"/>
+            <label for="categorySelect">Category:</label>
             <select id="categorySelect" name="categoryId">
-                <option value="" selected>请选择</option>
+                <option value="" selected>Select</option>
                 <option th:value="${categorySelectVo.id}" th:utext="${categorySelectVo.name}"
                         th:each="categorySelectVo: ${categorySelectVoList}"></option>
             </select>
-            <button class="button">搜索</button>
+            <button class="button">Search</button>
         </form>
     </div>
     <div class="btn-group pull-right">
-        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="列">
+        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="Columns">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" id="dropdownMenu1">
@@ -36,26 +36,26 @@
                 </label>
             </li>-->
         </ul>
-        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="刷新"></button>
+        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="Refresh"></button>
     </div>
     <div class="table-responsive" id="tableBlock">
         <table class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th></th>
-                <th>编号</th>
-                <th>类别名称</th>
-                <th>物品名称</th>
-                <th>物品描述</th>
-                <th>押金</th>
-                <th>租金(rmb/day)</th>
-                <th>状态</th>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>Item Name</th>
+                <th>Item description</th>
+                <th>Deposit</th>
+                <th>Rental (RMB/day)</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="vo, stat: ${stuffSearchVoList}">
                 <td class="text-center">
-                    <span class="detail glyphicon glyphicon-plus" title="详情"></span>
+                    <span class="detail glyphicon glyphicon-plus" title="Details"></span>
                 </td>
                 <td th:utext="${stat.index + 1}"></td>
                 <td th:utext="${vo.categoryName}"></td>

@@ -4,26 +4,26 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 租用项日统计 query object
+ * Daily rental statistics query object
  *
  */
 @Data
 @Accessors(chain = true)
 public class ItemDailyStatsQuery {
 	/**
-	 * 开始创建日期
+	 * Start creation date
 	 */
 	private String beginAddDate;
 	/**
-	 * 结束创建日期
+	 * End creation date
 	 */
 	private String endAddDate;
 	/**
-	 * 类别ID
+	 * Category ID
 	 */
 	private Integer categoryId;
 	/**
-	 * 状态
+	 * Status
 	 */
 	private Integer status;
 }

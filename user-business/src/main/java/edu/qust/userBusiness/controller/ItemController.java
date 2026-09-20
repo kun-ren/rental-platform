@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * 出租项 controller
+ * Rental-record controller
  *
  */
 @Slf4j
@@ -60,7 +60,7 @@ public class ItemController extends WebBaseController {
 		PayOrder payOrder = new PayOrder();
 		payOrder.setOut_trade_no(OUT_TRADE_NO_PREFIX + id);
 		payOrder.setTotal_amount(itemService.getTotalDepositAndRental(id).toString());
-		payOrder.setSubject("rent-X校园租赁 - 支付押金和租金");
+		payOrder.setSubject("rent-X Campus Rental - Deposit and Rental Payment");
 		payOrder.setProduct_code("FAST_INSTANT_TRADE_PAY");
 		AlipayClient alipayClient = new DefaultAlipayClient(gatewayUrL, appId, privateKey, "json",
 				StandardCharsets.UTF_8.name(),
@@ -82,10 +82,10 @@ public class ItemController extends WebBaseController {
 	}
 
 	/**
-	 * 我的租用
+	 * My Rentals
 	 *
 	 * <pre>
-	 *     "申请中"的显示"取消申请"操作
+	 *     Show the cancel action for records in the Applying state
 	 * </pre>
 	 *
 	 * @return page
@@ -105,7 +105,7 @@ public class ItemController extends WebBaseController {
 	}
 
 	/**
-	 * 取消申请
+	 * Cancel Application
 	 *
 	 * @param id item id
 	 * @return Response
@@ -119,19 +119,19 @@ public class ItemController extends WebBaseController {
 	@Data
 	private class PayOrder implements Serializable {
 		/**
-		 * 订单名称
+		 * Order subject
 		 */
 		private String subject;
 		/**
-		 * 商户网站唯一订单号
+		 * Merchant order number
 		 */
 		private String out_trade_no;
 		/**
-		 * 付款金额
+		 * Payment amount
 		 */
 		private String total_amount;
 		/**
-		 * 销售产品码，与支付宝签约的产品码名称
+		 * Product code agreed with Alipay
 		 */
 		private String product_code;
 	}

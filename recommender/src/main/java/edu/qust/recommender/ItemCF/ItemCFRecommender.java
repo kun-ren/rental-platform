@@ -52,16 +52,16 @@ public class ItemCFRecommender implements Serializable {
         productRatingDataset.printSchema();
         Dataset<Row> ratingDF = productRatingDataset.select("userId","productId","score")
                 .toDF("userId", "productId", "score").cache();
-        //TODO 核心算法，计算同现相似度，得到商品的相似度
+        //TODO Core algorithm: calculate co-occurrence similarity between products
         Dataset<Row> productRatingCountDF = ratingDF.groupBy("productId").count();// *productId | count *
         Dataset<Row> ratingWithCountDF = ratingDF.join(productRatingCountDF, "productId");
         Dataset<Row> joinedDF = ratingWithCountDF.join(ratingWithCountDF, "userId")// userId  productId count productId productId count
                 .toDF("userId", "product1", "score1", "count1", "product2", "score2", "count2")
                 .select("userId", "product1", "count1", "product2", "count2");
-        //创建临时表，用于写临时查询
+        //Create a temporary view for the query
         joinedDF.createOrReplaceTempView("joined");
 
-        //按照product1,product2 分组，统计userid的数量 得到对两个商品同时评分的人数;
+        //Group by product1 and product2 and count users who rated both products
         Dataset<Row> cooccurrenceDF = sparkSession.sql("select  product1, product2, count(userId) as cocount, first(count1) as count1, first(count2) as count2 " +
                 "from joined group by product1, product2").cache();
 
@@ -89,7 +89,7 @@ public class ItemCFRecommender implements Serializable {
                     item._2.forEach(e -> recs.add(new Recommendation(e._1, e._2)));
                     recs.stream()
                             .filter(e -> e.getProductId() != item._1)
-                            .sorted(Comparator.comparingDouble(Recommendation::getScore).reversed())   // 排除掉等于自身的productId
+                            .sorted(Comparator.comparingDouble(Recommendation::getScore).reversed())   // Exclude the product itself
                             .limit(MAX_RECOMMENDATION);
                     return new ProductRecs(item._1, recs);
                 });*/

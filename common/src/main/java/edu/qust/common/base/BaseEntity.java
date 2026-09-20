@@ -22,34 +22,34 @@ public class BaseEntity {
 	private Integer id;
 
 	/**
-	 * 添加人ID
+	 * Created-by user ID
 	 */
 	private Integer addUserId;
 
 	/**
-	 * 添加时间
+	 * Creation time
 	 */
 	private LocalDateTime addTime;
 
 	/**
-	 * 更新人ID
+	 * Updated-by user ID
 	 */
 	private Integer updateUserId;
 
 	/**
-	 * 修改时间
+	 * Update time
 	 */
 	private LocalDateTime updateTime;
 
 	/**
-	 * 标识(是否有效 0有效；-1无效)
+	 * Validity flag (0: valid; -1: invalid)
 	 */
 	private Boolean mark;
 
 	/**
-	 * 添加时补全add_user_id, add_time, update_user_id, update_time, mark
+	 * Populate add_user_id, add_time, update_user_id, update_time, and mark during creation
 	 *
-	 * @param userId 操作人
+	 * @param userId Operator
 	 */
 	public void completeAddParam(Integer userId) {
 		LocalDateTime now = LocalDateTime.now();

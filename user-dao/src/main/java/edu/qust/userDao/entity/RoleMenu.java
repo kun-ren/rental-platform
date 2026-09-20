@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 角色菜单关系
+ * Role-menu relation
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,12 +16,12 @@ import lombok.experimental.Accessors;
 public class RoleMenu extends BaseEntity {
 
     /**
-     * 角色ID
+     * Role ID
      */
     private Integer roleId;
 
     /**
-     * 菜单ID
+     * Menu ID
      */
     private Integer menuId;
 

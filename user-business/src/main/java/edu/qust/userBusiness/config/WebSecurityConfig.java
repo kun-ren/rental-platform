@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		http.cors().and().csrf().disable();
 		//http.formLogin().permitAll().loginProcessingUrl("/login").successForwardUrl("/login/success");
-		// 在用户名密码认证过滤器钱添加验证码校验过滤器
+		// Add the CAPTCHA validation filter before the username/password authentication filter
 		http.addFilterBefore(captchaValidationFilter, UsernamePasswordAuthenticationFilter.class);
 		List<RoleResourceDTO> roleResourceDTOList = roleResourceService.listRoleResourceDTOPlusRoot();
 		log.info("RoleResourceDTO list: {}", roleResourceDTOList);
@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(inMemoryUserDetailsManager());
 	}
 
-	//将用户表加载到内存
+	//Load users into memory
 	//TODO: loaderUserByUserName
 	@Bean
 	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {

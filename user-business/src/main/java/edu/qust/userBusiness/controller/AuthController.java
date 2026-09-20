@@ -30,7 +30,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 身份认证控制器
+ * Authentication controller
  *
  */
 @Slf4j
@@ -42,7 +42,7 @@ public class AuthController {
 	private StringRedisTemplate stringRedisTemplate;
 
 	/**
-	 * 跳转到”登录“页面
+	 * Open the login page
 	 *
 	 * @return page
 	 */
@@ -62,7 +62,7 @@ public class AuthController {
 	}
 
 	/**
-	 * 跳转到”忘记密码“页面
+	 * Open the forgot-password page
 	 *
 	 * @return page
 	 */
@@ -72,7 +72,7 @@ public class AuthController {
 	}
 
 	/**
-	 * 获取验证码（base64字符串）
+	 * Get the CAPTCHA as a Base64 string
 	 *
 	 * @param response response
 	 */
@@ -101,24 +101,24 @@ public class AuthController {
 			printWrite.write(encodedString);
 			printWrite.flush();
 		} catch (IOException e) {
-			log.error("验证码生成错误", e);
+			log.error("Failed to generate the CAPTCHA", e);
 		}
 	}
 
 	/**
-	 * 验证码校验失败
+	 * CAPTCHA validation failed
 	 *
 	 * @param session session
 	 * @return page
 	 */
 	@GetMapping("/captcha/error")
 	public String captchaError(HttpSession session, Model model) {
-		//spring security默认会把异常存到session中。
+		//Spring Security stores the exception in the session by default.
 		AuthenticationException authenticationException =
 				(AuthenticationException) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-		//判断异常是否是我们自定义的验证码认证异常
+		//Check whether this is the custom CAPTCHA authentication exception
 		if (authenticationException instanceof CaptchaValidationException) {
-			//验证码认证错误标识，存入request中只针对本次请求。不影响整个会话
+			//Store the CAPTCHA error in the request so it affects only this request, not the entire session
 			model.addAttribute("captchaErrorMsg", authenticationException.getMessage());
 		}
 		return "login";

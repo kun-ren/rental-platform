@@ -23,7 +23,7 @@ public class CategoryNameValidator extends ValidatorHandler<String> implements V
 	@Override
 	public boolean validate(ValidatorContext context, String name) {
 		if (categoryService.existsName(name)) {
-			context.addError(ValidationError.create("已存在该类别"));
+			context.addError(ValidationError.create("The category already exists"));
 			return false;
 		}
 		return true;

@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 用户角色关系
+ * User-role relation
  *
  */
 @Data
@@ -17,12 +17,12 @@ import lombok.experimental.Accessors;
 public class UserRole extends BaseEntity {
 
     /**
-     * 用户ID
+     * User ID
      */
     private Integer userId;
 
     /**
-     * 角色ID
+     * Role ID
      */
     private Integer roleId;
 

@@ -27,9 +27,9 @@ jQuery(function ($) {
             onClick: onCategoryAddSelectTreeNodeClick
         }
     };
-    // 所有类别
+    // All categories
     var allCategories = [];
-    //启用类别
+    //Enabled Categories
     var enabledCategories = [];
 
     var inputCategoryId = $('#inputCategoryId');
@@ -45,7 +45,7 @@ jQuery(function ($) {
 
     var categoriesListTree;
 
-    // 类别树节点被点击相应的事件
+    // Handle a category-tree node click
     function onCategoryTreeNodeClick(event, treeId, treeNode) {
         var parentNode = treeNode.getParentNode();
         if (parentNode === null) {
@@ -56,7 +56,7 @@ jQuery(function ($) {
         inputCategoryId.val(treeNode.id);
         inputName.val(treeNode.name);
         inputDescription.html(treeNode.description);
-        inputParentName.val(parentNode === null ? '无' : parentNode.name);
+        inputParentName.val(parentNode === null ? 'None' : parentNode.name);
         inputParentId.val(parentNode === null ? -1 : parentNode.id);
         inputLevel.val(treeNode.level);
         originalLevel = treeNode.level;
@@ -72,7 +72,7 @@ jQuery(function ($) {
     var hintModalHeader = hintModal.find('.modal-header');
     var hintModalBody = hintModal.find('.modal-body');
 
-    // 显示提示框
+    // Show the notification dialog
     function showHintModal(message, success) {
         if (success) {
             hintModalHeader.attr('class', 'modal-header bg-success');
@@ -85,10 +85,10 @@ jQuery(function ($) {
         hintModal.modal();
     }
 
-    // 类别选择树节点被点击相应的事件
+    // Handle a category-selection tree node click
     function onCategorySelectTreeNodeClick(event, treeId, treeNode) {
         if (treeNode.level >= originalLevel) {
-            showHintModal('不能降低原级别，请选择比原级别小的父类别', false);
+            showHintModal('The new parent must be above the category's current level', false);
             return;
         }
         inputParentName.val(treeNode.name);
@@ -99,7 +99,7 @@ jQuery(function ($) {
 
     function onCategoryAddSelectTreeNodeClick(event, treeId, treeNode) {
         if (treeNode.level === 3) {
-            showHintModal('不能选择三级类别，请重新选择', false);
+            showHintModal('A level-three category cannot be selected as the parent', false);
             return;
         }
         inputAddParentName.val(treeNode.name);
@@ -108,7 +108,7 @@ jQuery(function ($) {
         parentSelectAddModal.modal('hide');
     }
 
-    // 获取所有类别并初始化类别树
+    // Load all categories and initialize the category tree
     function getCategoriesAndInitTree() {
         $.get("/categories", function (data) {
             console.log(data);
@@ -116,8 +116,8 @@ jQuery(function ($) {
                 allCategories = data.data;
                 let rootCategory = {
                     id: 0,
-                    name: "根类别",
-                    description: "根类别",
+                    name: "Root Category",
+                    description: "Root Category",
                     level: 0,
                     status: true,
                     open: true
@@ -132,7 +132,7 @@ jQuery(function ($) {
                     }
                 }
                 console.log(enabledCategories);
-                // 初始化树为启用类别
+                // Initialize the tree with enabled categories
                 categoriesListTree = $.fn.zTree.init(categoryTreeBlock, categoryTreeSetting, enabledCategories);
             } else {
                 alert("error");
@@ -165,7 +165,7 @@ jQuery(function ($) {
         });
     }
 
-    // 根据类别启用状态过滤
+    // Filter categories by enabled status
     function initFilterByDeleted() {
         $("#filterByDeletedMenu").find("li a").click(function () {
             var text = $(this).text();
@@ -209,9 +209,9 @@ jQuery(function ($) {
                 success: function (data) {
                     if (data.code === RESPONSE_CODE.SUCCESS) {
                         reset();
-                        showHintModal('修改成功', true);
+                        showHintModal('Updated successfully', true);
                     } else {
-                        showHintModal(data.data + ', 更新失败', false);
+                        showHintModal(data.data + ', Update failed', false);
                     }
                 }
             });
@@ -251,11 +251,11 @@ jQuery(function ($) {
                     // if data is the error page
                     if (data.code === RESPONSE_CODE.SUCCESS) {
                         reset();
-                        showHintModal('添加成功', true);
+                        showHintModal('Added successfully', true);
                         // hide add modal
                         addModal.modal('hide');
                     } else {
-                        showHintModal(data.message + ', 添加失败', false);
+                        showHintModal(data.message + ', Add failed', false);
                     }
                 }
             });
@@ -272,9 +272,9 @@ jQuery(function ($) {
                     // if data is the error page
                     if (data.code === RESPONSE_CODE.SUCCESS) {
                         reset();
-                        showHintModal('删除成功', true);
+                        showHintModal('Deleted successfully', true);
                     } else {
-                        showHintModal(data.message + ', 删除失败', false);
+                        showHintModal(data.message + ', Delete failed', false);
                     }
                 }
             });
@@ -285,7 +285,7 @@ jQuery(function ($) {
         updateFormFieldset.attr("disabled", "disabled");
     }
 
-    // 重置页面
+    // Reset the page
     function reset() {
         getCategoriesAndInitTree();
         // reset update form
@@ -293,7 +293,7 @@ jQuery(function ($) {
         // reset add form
         document.querySelector('#addForm').reset();
         disableUpdateForm();
-        $("#filterByDeletedBtn").find(".text").text('启用类别');
+        $("#filterByDeletedBtn").find(".text").text('Enabled Categories');
     }
 
     function initRefreshListener() {

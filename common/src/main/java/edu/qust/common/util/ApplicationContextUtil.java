@@ -14,10 +14,10 @@ public class ApplicationContextUtil {
 	}
 
 	/**
-	 * 根据类型获取Bean
+	 * Get a bean by type
 	 *
-	 * @param requiredType 需要获取的bean类型
-	 * @param <T>          需要获取的bean类型
+	 * @param requiredType Required bean type
+	 * @param <T>          Required bean type
 	 * @return Bean
 	 */
 	public static <T> T getBean(Class<T> requiredType) {

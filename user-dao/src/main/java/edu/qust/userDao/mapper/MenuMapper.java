@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 菜单 Mapper
+ * Menu mapper
  *
  */
 public interface MenuMapper extends BaseMapper<Menu> {

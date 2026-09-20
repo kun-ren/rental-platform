@@ -3,7 +3,7 @@ package edu.qust.userBusiness.exception;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * 验证码校验异常
+ * CAPTCHA validation exception
  *
  * @author yanganyu
  * @date 2019/3/2 17:07

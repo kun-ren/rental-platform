@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 菜单VO
+ * Menu view object
  * <p>
- * （该类数据由管理员，不考虑XSS防御，因此不必继承BaseVO）
+ * Administrators manage this data, so inheriting BaseVO for XSS protection is unnecessary.
  * <p/>
  */
 @Data
@@ -17,15 +17,15 @@ import java.util.List;
 public class MenuVO implements Serializable {
 
 	/**
-	 * 子菜单
+	 * Child menus
 	 */
 	private List<MenuVO> children;
 	/**
-	 * 菜单名称
+	 * Menu name
 	 */
 	private String name;
 	/**
-	 * 菜单URL
+	 * Menu URL
 	 */
 	private String url;
 }

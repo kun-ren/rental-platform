@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户角色关系 controller
+ * User-role relation controller
  *
  */
 @Slf4j

@@ -1,7 +1,7 @@
 package edu.qust.common.exception;
 
 /**
- * 资源无权限访问异常
+ * Resource-forbidden exception
  *
  */
 public class ResourceForbiddenException extends BusinessException {

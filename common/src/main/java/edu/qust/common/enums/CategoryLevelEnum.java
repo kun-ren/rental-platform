@@ -1,22 +1,22 @@
 package edu.qust.common.enums;
 
 /**
- * 类别层次枚举
+ * Category-level enum
  *
  */
 public enum CategoryLevelEnum {
 	/**
-	 * 一级类别
+	 * Level-One Category
 	 */
-	ONE(1, "一级类别"),
+	ONE(1, "Level-One Category"),
 	/**
-	 * 二级类别
+	 * Level-Two Category
 	 */
-	TWO(2, "二级类别"),
+	TWO(2, "Level-Two Category"),
 	/**
-	 * 三级类别
+	 * Level-Three Category
 	 */
-	THREE(3, "三级类别");
+	THREE(3, "Level-Three Category");
 
 	private int code;
 	private String name;

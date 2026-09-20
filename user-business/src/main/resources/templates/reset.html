@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>忘记密码</title>
+    <title>Forgot Password</title>
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
     <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
@@ -13,9 +13,9 @@
 </head>
 <body>
 <!--[if lte IE8]>
-<p>浏览器版本太低，请
-    <a target="_blank" href="http://www.browsehappy.com">升级</a>
-    为最新的ie浏览器！
+<p>Your browser is outdated. Please
+    <a target="_blank" href="http://www.browsehappy.com">upgrade</a>
+    to a current browser version.
 </p>
 <![endif]-->
 <div class="ct-container col-md-12">
@@ -27,27 +27,27 @@
                 <!--forget password -->
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px;">
-                        <h2>第一步：</h2>
+                        <h2>Step 1:</h2>
                     </li>
                     <li style="margin-top:0;">
                         <div class="user-div">
-                            <input id="accountName" type="text" placeholder="用户名/邮箱">
+                            <input id="accountName" type="text" placeholder="Username/Email">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="code-div">
-                            <input name="code" type="text" id="emailCaptcha" placeholder="邮箱验证码">
+                            <input name="code" type="text" id="emailCaptcha" placeholder="Email Verification Code">
                         </div>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="emailSendButton">
-                            <i class="fa">发送</i>
+                            <i class="fa">Send</i>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="nextStepButton">
-                            <i class="fa">下一步</i>
+                            <i class="fa">Next</i>
                         </button>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@
                 <!-- reset password -->
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px;">
-                        <h2>第二步：</h2>
+                        <h2>Step 2:</h2>
                     </li>
                     <li style="margin-top:25px">
                         <div class="user-div">
@@ -66,21 +66,21 @@
                     <li>
                         <div class="password-div">
                             <input name="password" id="password" type="password"
-                                   placeholder="密码：6~16个字符，首尾不能有空格">
+                                   placeholder="Password: 6-16 characters with no leading or trailing spaces">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="cpassword-div">
                             <input name="cpassword" id="confirmedPassword"
-                                   type="password" placeholder="确认密码：请再次填写密码">
+                                   type="password" placeholder="Confirm Password: enter the password again">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="resetButton">
-                            <i class="fa">重置</i>
+                            <i class="fa">Reset</i>
                         </button>
                     </li>
                 </ul>
@@ -89,7 +89,7 @@
     </div>
     <footer class="share-footer col-md-12"></footer>
     <div class="error-box" id="error-box">
-        <p class="error-info" id="error-info">出错了</p>
+        <p class="error-info" id="error-info">An error occurred</p>
     </div>
 </div>
 </body>

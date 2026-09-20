@@ -4,22 +4,22 @@ import edu.qust.common.component.alarm.AlarmApi;
 import edu.qust.common.util.ApplicationContextUtil;
 
 /**
- * 用邮件实现的告警
+ * Email-based alert implementation
  *
  */
 public class MailAlarm implements AlarmApi {
 	private static MailService mailService;
 
 	/**
-	 * 发送告警
+	 * Send an alert
 	 *
-	 * @param content 告警内容
+	 * @param content Alert content
 	 */
 	@Override
 	public void alarm(String content) {
 		if (mailService == null) {
 			mailService = ApplicationContextUtil.getBean(MailService.class);
 		}
-		mailService.sendEmailAsync(" codethereforam@gmail.com " , "告警" , content);
+		mailService.sendEmailAsync(" codethereforam@gmail.com " , "Alert" , content);
 	}
 }

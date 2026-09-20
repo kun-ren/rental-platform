@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * 用户角色关系 service
+ * User-role relation service
  *
  */
 @Slf4j

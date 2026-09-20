@@ -10,25 +10,25 @@ import java.util.Map;
  */
 public enum ItemStatusEnum implements IEnum<Integer> {
 	/**
-	 * 申请中
+	 * Applying
 	 */
-	APPLYING(0, "申请中"),
+	APPLYING(0, "Applying"),
 	/**
-	 * 不通过
+	 * Rejected
 	 */
-	DISAPPROVED(1, "不通过"),
+	DISAPPROVED(1, "Rejected"),
 	/**
-	 * 待支付
+	 * Awaiting Payment
 	 */
-	UNPAID(2, "待支付"),
+	UNPAID(2, "Awaiting Payment"),
 	/**
-	 * 租用中
+	 * Renting
 	 */
-	RENTING(3, "租用中"),
+	RENTING(3, "Renting"),
 	/**
-	 * 已归还
+	 * Returned
 	 */
-	RETURNED(4, "已归还");
+	RETURNED(4, "Returned");
 
 	private int value;
 	private String name;

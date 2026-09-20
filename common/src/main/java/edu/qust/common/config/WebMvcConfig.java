@@ -30,10 +30,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 配置多视图解析，包括thymeleaf和Json两种视图
+ * Configure Thymeleaf and JSON view resolution
  * <ul>
- * <li>通过url查看thymeleaf视图</li>
- * <li>通过url+'.json'查看Json视图</li>
+ * <li>Use the URL for the Thymeleaf view</li>
+ * <li>Append .json to the URL for the JSON view</li>
  * </ul>
  *
  */
@@ -47,13 +47,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 映射静态资源路径
+	 * Map static-resource paths
 	 *
 	 * @param registry registry
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		//相当于 <mvc:resources mapping="/**" location="/static/" /> 也可设置多个路径
+		//Equivalent to <mvc:resources mapping="/**" location="/static/" />; multiple paths are supported
 		registry.addResourceHandler("/**")
 				.addResourceLocations("classpath:/static/");
 	}
@@ -69,7 +69,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
 		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
 		resolver.setContentNegotiationManager(manager);
-		// 定义所有的视图解析器
+		// Define all view resolvers
 		List<ViewResolver> resolvers = new ArrayList<>();
 		resolvers.add(jsonViewResolver());
 		resolvers.add(thymeleafViewResolver());
@@ -86,27 +86,27 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Bean
 	public ViewResolver jsonViewResolver() {
 		MappingJackson2JsonView mappingJackson2JsonView = new MappingJackson2JsonView();
-		// 设置LocalDateTime等序列化
+		// Configure serialization for LocalDateTime and related types
 		mappingJackson2JsonView.setObjectMapper(objectMapper());
 		return (viewName, locale) -> mappingJackson2JsonView;
 	}
 
 	/**
-	 * 配置Thymeleaf视图解析器
+	 * Configure the Thymeleaf view resolver
 	 *
 	 * @return org.thymeleaf.spring5.view.ThymeleafViewResolver
 	 */
 	private ThymeleafViewResolver thymeleafViewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
-		// 注意“order”和“viewNames”是可选的
+		// The order and viewNames settings are optional
 		viewResolver.setOrder(1);
 		viewResolver.setViewNames(new String[]{".html"});
 		return viewResolver;
 	}
 
 	/**
-	 * 创建模版引擎并为模板引擎注入模板解析器
+	 * Create the template engine and inject the template resolver
 	 *
 	 * @return org.thymeleaf.spring5.SpringTemplateEngine
 	 */
@@ -119,7 +119,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 创建模版解析器
+	 * Create the template resolver
 	 *
 	 * @return org.thymeleaf.templateresolver.ITemplateResolver
 	 */
@@ -146,15 +146,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	private MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		// 由于将response header中Content-Type默认设置为text/html，会造成默认jackson无法解析，参考fastjson源码
+		// Because the response Content-Type defaults to text/html, the default Jackson converter cannot parse it; see the Fastjson implementation
 		jsonConverter.setSupportedMediaTypes(Collections.singletonList((MediaType.ALL)));
-		// 设置LocalDateTime等序列化
+		// Configure serialization for LocalDateTime and related types
 		jsonConverter.setObjectMapper(objectMapper());
 		return jsonConverter;
 	}
 
 	/**
-	 * 配置@RestController、@ResponseBody、@RequestBody使用自定义json converter
+	 * Configure a custom JSON converter for @RestController, @ResponseBody, and @RequestBody
 	 *
 	 * @param converters converters
 	 */

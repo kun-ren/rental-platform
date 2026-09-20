@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
- * 用户表 service
+ * User table service
  *
  */
 @Slf4j

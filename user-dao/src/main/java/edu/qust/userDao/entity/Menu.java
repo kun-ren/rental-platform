@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 菜单
+ * Menu
  *
  */
 @Data
@@ -17,17 +17,17 @@ import lombok.experimental.Accessors;
 public class Menu extends BaseEntity {
 
     /**
-     * 父ID，根菜单pid为0
+     * Parent ID; root menus use pid 0
      */
     private Integer pid;
 
     /**
-     * 菜单名称
+     * Menu name
      */
     private String name;
 
     /**
-     * 菜单URL
+     * Menu URL
      */
     private String url;
 

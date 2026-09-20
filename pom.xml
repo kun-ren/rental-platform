@@ -86,12 +86,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-        <!--数据验证-->
+        <!--Data validation-->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
-        <!--数据模型映射-->
+        <!--Data-model mapping-->
         <dependency>
             <groupId>com.baidu.unbiz</groupId>
             <artifactId>easy-mapper</artifactId>
@@ -128,13 +128,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-        <!-- druid数据库连接池 -->
+        <!-- Druid database connection pool -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.10</version>
         </dependency>
-        <!-- MySql数据库驱动 -->
+        <!-- MySQL database driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

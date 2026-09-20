@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    //确认删除区域
+    //Deletion confirmation area
     var deleteConfirmBlock = $("#deleteConfirm");
     var singleCheckBoxes = $(".single-checkbox");
     var selectAllCheckBox = $("#selectAllCheckBox");
     var multiDeleteBtn = $("#multiDeleteBtn");
     var dropdownMenu1 = $("#dropdownMenu1");
 
-    //显示确认删除警告框
+    //Show the deletion confirmation dialog
     $(".btn-single-delete").click(function () {
         deleteConfirmBlock.slideDown();
     });
@@ -22,25 +22,25 @@ $(document).ready(function () {
         }
     });
 
-    //隐藏确认删除警告框
+    //Hide the deletion confirmation dialog
     deleteConfirmBlock.find("button").click(function () {
         deleteConfirmBlock.hide(500);
     });
 
-    //点击确认删除后的操作
+    //Handle deletion confirmation
     deleteConfirmBlock.find(".confirm").click(function () {
         // delete the selected item
     });
 
     var pageNumBtns = $(".pagination .number");
 
-    //切换页码中的高亮页
+    //Update the highlighted page number
     pageNumBtns.click(function () {
         pageNumBtns.removeClass("active");
         $(this).addClass("active");
     });
 
-    //前一页的操作
+    //Go to the previous page
     $(".pagination .previous").click(function () {
         var activePageObject = $(".pagination .active");
         var pageNum = parseInt(activePageObject.text());
@@ -57,7 +57,7 @@ $(document).ready(function () {
         });
     });
 
-    //后一页的操作
+    //Go to the next page
     $(".pagination .next").click(function () {
         var activePageObject = $(".pagination .active");
         var pageNum = parseInt(activePageObject.text());
@@ -74,13 +74,13 @@ $(document).ready(function () {
         });
     });
 
-    //表头内容数组
+    //Table-header labels
     var thsText = [];
     $("table").find("th").each(function () {
         thsText.push($(this).text());
     });
 
-    //显示表格一条的具体信息
+    //Show one table row's details
     $(".detail").parents("td").click(function () {
         $(this).find("span").toggleClass("glyphicon-plus glyphicon-minus");
 

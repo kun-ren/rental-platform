@@ -1,17 +1,17 @@
 package edu.qust.common.component.alarm;
 
 /**
- * 告警接口
+ * Alert interface
  * <pre>
- *     定义一个接口，使用SPI技术调用，至于客户端怎么使用不用去官，可以基于邮件、短信等方式
+ *     Define an SPI-based alert interface; clients may deliver alerts through email, SMS, or another channel
  * </pre>
  *
  */
 public interface AlarmApi {
 	/**
-	 * 发送告警
+	 * Send an alert
 	 *
-	 * @param content 告警内容
+	 * @param content Alert content
 	 */
 	void alarm(String content);
 }

@@ -35,7 +35,7 @@
     background: #7fcdff;
 }
 /**
- * login和register页面的布局 纸张部分
+ * Paper section of the login and registration layout
  */
 .paper-content{
     width:460px;
@@ -47,7 +47,7 @@
     box-shadow: 6px 2px 10px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
     *zoom: 1;
 }
-	/** * 定义两个伪元素，平行四边形的，用底部的box-shadow来做纸面的曲边部分 * **/
+	/** * Define two parallelogram pseudo-elements and use a bottom box shadow to create the curved paper edge * **/
 .paper-content:before {
     transform: skew(-15deg) rotate(-5deg);
     left: 35px;
@@ -69,10 +69,10 @@
 }
 
 /**
- * register和login页面的布局  表单部分
+ * Form section of the registration and login layout
  */
 .paper-header{
-    font-family: LeckerliOne,微软雅黑,Arial;
+    font-family: LeckerliOne,Arial,Arial;
     color:white;
     font-size:28px;
     text-align: center;
@@ -92,7 +92,7 @@
 }
 
 /**
- * register和login页面的布局  li部分
+ * List-item section of the registration and login layout
  */
 .form-place li{
     height:55px;

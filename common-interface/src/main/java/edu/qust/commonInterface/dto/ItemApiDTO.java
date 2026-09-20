@@ -15,44 +15,44 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class ItemApiDTO implements Serializable {
 	/**
-	 * 租用项ID
+	 * Rental record ID
 	 */
 	private Integer itemId;
 	/**
-	 * 物品名称
+	 * Item Name
 	 */
 	private String stuffName;
 	/**
-	 * 申请时间
+	 * Application Time
 	 */
 	private LocalDateTime applyTime;
 	/**
-	 * 审批时间
+	 * Approval Time
 	 */
 	private LocalDateTime approvalTime;
 	/**
-	 * 支付时间
+	 * Payment Time
 	 */
 	private LocalDateTime payTime;
 
 	/**
-	 * 租用天数
+	 * Rental Days
 	 */
 	private Integer rentDay;
 	/**
-	 * 归还时间
+	 * Return Time
 	 */
 	private LocalDateTime endTime;
 	/**
-	 * 状态（0：申请中；1：不通过；2：租用中；3： 已归还）
+	 * Status (0: applying; 1: rejected; 2: renting; 3: returned)
 	 */
 	private ItemStatusEnum status;
 	/**
-	 * 所有者名称
+	 * Owner name
 	 */
 	private String ownerName;
 	/**
-	 * 租用者
+	 * Renter
 	 */
 	private String renterName;
 }

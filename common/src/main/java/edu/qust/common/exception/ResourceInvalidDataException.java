@@ -1,7 +1,7 @@
 package edu.qust.common.exception;
 
 /**
- * 资源数据不合法异常
+ * Invalid-resource-data exception
  *
  */
 public class ResourceInvalidDataException extends BusinessException {

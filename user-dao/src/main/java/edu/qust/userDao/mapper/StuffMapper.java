@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 物品 Mapper
+ * Item mapper
  */
 public interface StuffMapper extends BaseMapper<Stuff> {
 

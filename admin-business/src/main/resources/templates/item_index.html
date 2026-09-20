@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>租用管理</title>
+    <title>Rental Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
@@ -11,10 +11,10 @@
 <body>
 <div class="container">
     <div class="page-header text-center">
-        <h2 class="text-primary"><em>租用列表</em></h2>
+        <h2 class="text-primary"><em>Rental List</em></h2>
     </div>
     <div class="btn-group pull-right">
-        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="列">
+        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="Columns">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" id="dropdownMenu1">
@@ -24,32 +24,32 @@
                 </label>
             </li>-->
         </ul>
-        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="刷新"></button>
+        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="Refresh"></button>
     </div>
     <div class="table-responsive" id="tableBlock">
         <table class="table table-striped table-hover table-condensed">
             <thead>
             <tr>
                 <th></th>
-                <th><input type="checkbox" title="全选" id="selectAllCheckBox"/></th>
-                <th>编号</th>
-                <th>物品名称</th>
-                <th>申请时间</th>
-                <th>审批时间</th>
-                <th>支付时间</th>
-                <th>租用天数</th>
-                <th>归还时间</th>
-                <th>状态</th>
-                <th>所有者</th>
-                <th>租用者</th>
-                <th>操作</th>
+                <th><input type="checkbox" title="Select All" id="selectAllCheckBox"/></th>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>Application Time</th>
+                <th>Approval Time</th>
+                <th>Payment Time</th>
+                <th>Rental Days</th>
+                <th>Return Time</th>
+                <th>Status</th>
+                <th>Owner</th>
+                <th>Renter</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="dto, stat: ${itemApiDTOList}">
                 <input name="inputItemId" type="hidden" th:value="${dto.itemId}"/>
                 <td class="text-center">
-                    <span class="detail glyphicon glyphicon-plus" title="详情"></span>
+                    <span class="detail glyphicon glyphicon-plus" title="Details"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
                 <td th:text="${stat.index + 1}"></td>
@@ -64,11 +64,11 @@
                 <td th:text="${dto.renterName}"></td>
                 <td th:switch="${dto.status.getValue()}">
                     <div th:case="0">
-                        <a href="javascript:void(0)" class="btn btn-primary approveBtn">批准</a>
-                        <a href="javascript:void(0)" class="btn btn-primary disApproveBtn">否定</a>
+                        <a href="javascript:void(0)" class="btn btn-primary approveBtn">Approve</a>
+                        <a href="javascript:void(0)" class="btn btn-primary disApproveBtn">No</a>
                     </div>
                     <div th:case="3">
-                        <a href="javascript:void(0)" class="btn btn-primary returnBtn">归还</a>
+                        <a href="javascript:void(0)" class="btn btn-primary returnBtn">Return</a>
                     </div>
                 </td>
             </tr>
@@ -96,13 +96,13 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h4 class="modal-title">信息</h4>
+                <h4 class="modal-title">Information</h4>
             </div>
             <div class="modal-body">
                 <h5><span id="hintContent"></span></h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
             </div>
         </div>
     </div>

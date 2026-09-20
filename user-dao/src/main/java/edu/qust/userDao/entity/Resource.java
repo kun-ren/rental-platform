@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 资源
+ * Resource
  *
  */
 @Data
@@ -17,22 +17,22 @@ import lombok.experimental.Accessors;
 public class Resource extends BaseEntity {
 
     /**
-     * 资源名称
+     * Resource name
      */
     private String name;
 
     /**
-     * 资源描述
+     * Resource description
      */
     private String description;
 
     /**
-     * 资源URL
+     * Resource URL
      */
     private String url;
 
     /**
-     * HTTP方法
+     * HTTP method
      */
     private String method;
 

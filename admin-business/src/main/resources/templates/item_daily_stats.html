@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>租用日统计</title>
+    <title>Daily Rental Statistics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-datepicker-1.8.0/css/bootstrap-datepicker.min.css}">
@@ -11,11 +11,11 @@
 <body>
 <div class="container">
     <div class="page-header text-center">
-        <h2 class="text-primary"><em>租用日统计</em></h2>
+        <h2 class="text-primary"><em>Daily Rental Statistics</em></h2>
     </div>
     <div class="form-inline">
         <form th:action="@{/items/daily-stats}" th:method="post">
-            <label>创建日期：
+            <label>Created Date：
                 <input name="beginAddDate" th:value="${itemDailyStatsApiParam?.beginAddDate}" class="datePicker"/>
             </label>
             <label>
@@ -23,27 +23,27 @@
                 <input name="endAddDate" th:value="${itemDailyStatsApiParam?.endAddDate}" class="datePicker"/>
             </label>
             &nbsp;
-            <label for="categorySelect">类别：</label>
+            <label for="categorySelect">Category:</label>
             <select id="categorySelect" name="categoryId">
-                <option value="">请选择</option>
+                <option value="">Select</option>
                 <option th:value="${categorySelectMap.key}" th:text="${categorySelectMap.value}"
                         th:each="categorySelectMap: ${categorySelectIdNameMap}"
                         th:selected="${itemDailyStatsApiParam?.categoryId == categorySelectMap.key}"></option>
             </select>
             &nbsp;
-            <label for="statusSelect">状态：</label>
+            <label for="statusSelect">Status:</label>
             <select id="statusSelect" name="status">
-                <option value="">请选择</option>
+                <option value="">Select</option>
                 <option th:value="${statusStatus.value}" th:text="${statusStatus.name}"
                         th:each="statusStatus: ${statusSelectList}"
                         th:selected="${itemDailyStatsApiParam?.status == statusStatus.value}"></option>
             </select>
             &nbsp;
-            <button class="button">查询</button>
+            <button class="button">Search</button>
         </form>
     </div>
     <div class="btn-group pull-right">
-        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="列">
+        <button class="btn btn-primary glyphicon glyphicon-th" data-toggle="dropdown" title="Columns">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" id="dropdownMenu1">
@@ -53,7 +53,7 @@
                 </label>
             </li>-->
         </ul>
-        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="刷新"></button>
+        <button class="btn btn-warning glyphicon glyphicon-refresh" id="refreshBtn" title="Refresh"></button>
     </div>
     <div class="modal fade" id="addDiv">
         <div class="modal-dialog modal-sm">
@@ -87,19 +87,19 @@
             <thead>
             <tr>
                 <th></th>
-                <th>编号</th>
-                <th>类别</th>
-                <th>创建日期</th>
-                <th>状态</th>
-                <th>总数</th>
-                <th>押金总额</th>
-                <th>租金总额</th>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>Total Count</th>
+                <th>Total Deposit</th>
+                <th>Total Rental</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="stats, stat: ${dailyStatsList}">
                 <td class="text-center">
-                    <span class="detail glyphicon glyphicon-plus" title="详情"></span>
+                    <span class="detail glyphicon glyphicon-plus" title="Details"></span>
                 </td>
                 <td th:text="${stat.index + 1}"></td>
                 <td th:text="${categorySelectIdNameMap[stats.categoryId]}"></td>

@@ -48,7 +48,7 @@ kaptcha:
   textproducerCharLength: 4
   textproducerFontSize: 35
   textproducerFontColor: blue
-  textproducerFontNames: 宋体,楷体,微软雅黑
+  textproducerFontNames: Arial,Verdana,Tahoma
 logging:
   level:
     edu:

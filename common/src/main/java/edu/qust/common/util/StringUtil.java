@@ -6,7 +6,7 @@ import org.springframework.util.Assert;
 import java.util.UUID;
 
 /**
- * 字符串工具类
+ * String utilities
  *
  */
 public class StringUtil {

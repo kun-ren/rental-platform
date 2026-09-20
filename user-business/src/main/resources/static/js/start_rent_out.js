@@ -17,7 +17,7 @@ jQuery(function ($) {
     const $hintModalHeader = $hintModal.find('.modal-header');
     const $hintModalBody = $hintModal.find('.modal-body');
 
-    // 显示提示框
+    // Show the notification dialog
     function showHintModal(message, success) {
         if (success) {
             $hintModalHeader.attr('class', 'modal-header bg-success');
@@ -32,10 +32,10 @@ jQuery(function ($) {
 
     const $inputCategoryName = $('#inputCategoryName');
 
-    // 类别选择树节点被点击相应的事件
+    // Handle a category-selection tree node click
     function onCategorySelectTreeNodeClick(event, treeId, treeNode) {
         if (treeNode.level !== 3) {
-            showHintModal('只能选择第三级别', false);
+            showHintModal('Only a level-three category can be selected', false);
             return;
         }
         $inputCategoryName.val(treeNode.name);
@@ -52,7 +52,7 @@ jQuery(function ($) {
 
     let categories = [];
 
-    // 获取所有类别并初始化类别树
+    // Load all categories and initialize the category tree
     function getCategoriesAndInitTree() {
         $.get("/categories", function (data) {
             console.log(data);
@@ -60,15 +60,15 @@ jQuery(function ($) {
                 categories = data.data;
                 let rootCategory = {
                     id: 0,
-                    name: "根类别",
-                    description: "根类别",
+                    name: "Root Category",
+                    description: "Root Category",
                     level: 0,
                     status: true,
                     open: true
                 };
                 categories.push(rootCategory);
                 console.log(categories);
-                // 初始化类别树
+                // Initialize the category tree
                 $.fn.zTree.init($categorySelectTreeBlock, categorySelectTreeSetting, categories);
             } else {
                 alert("error");
@@ -111,9 +111,9 @@ jQuery(function ($) {
                     if (data.code === RESPONSE_CODE.SUCCESS) {
                         // reset add form
                         document.querySelector('#addForm').reset();
-                        showHintModal('添加成功', true);
+                        showHintModal('Added successfully', true);
                     } else {
-                        showHintModal(data.message + ', 添加失败', false);
+                        showHintModal(data.message + ', Add failed', false);
                     }
                 }
             });

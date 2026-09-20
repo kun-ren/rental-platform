@@ -9,34 +9,34 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * 租用项日统计 api dto
+ * Daily rental statistics API DTO
  *
  */
 @Data
 @Accessors(chain = true)
 public class ItemDailyStatsApiDTO implements Serializable {
 	/**
-	 * 结束创建日期
+	 * End creation date
 	 */
 	private LocalDate addDate;
 	/**
-	 * 类别ID
+	 * Category ID
 	 */
 	private Integer categoryId;
 	/**
-	 * 状态
+	 * Status
 	 */
 	private ItemStatusEnum status;
 	/**
-	 * 总数量
+	 * Total count
 	 */
 	private Integer totalCount;
 	/**
-	 * 押金总额
+	 * Total Deposit
 	 */
 	private BigDecimal totalDeposit;
 	/**
-	 * 租金总额
+	 * Total Rental
 	 */
 	private BigDecimal totalRental;
 }

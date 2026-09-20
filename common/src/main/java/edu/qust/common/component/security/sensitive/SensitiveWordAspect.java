@@ -13,7 +13,7 @@ import edu.qust.common.component.security.sensitive.plugin.SensitiveFilter;
 import java.lang.reflect.Method;
 
 /**
- * 敏感词过滤切面
+ * Sensitive-word filtering aspect
  *
  */
 @Aspect
@@ -23,7 +23,7 @@ public class SensitiveWordAspect {
 	@Pointcut("@annotation(EnableSensitive)")
 	private void enableSensitiveWordApsect(){}
 	/**
-	 * 敏感词过滤切面方法
+	 * Sensitive-word filtering advice
 	 *
 	 * @param joinPoint joinPoint
 	 *
@@ -49,7 +49,7 @@ public class SensitiveWordAspect {
 			}
 		}
 		if ( ! original.equals(stuffParam) ){
-			throw new ContentIllegalException("含有非法信息");
+			throw new ContentIllegalException("Contains prohibited content");
 		}
 		return ;
 	}

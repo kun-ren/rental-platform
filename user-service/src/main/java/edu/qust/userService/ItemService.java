@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 出租项 service
+ * Rental-record service
  *
  */
 @Slf4j
@@ -62,7 +62,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 						.eq(Stuff::getId, stuffId)
 						.eq(Stuff::getMark, EnableEnum.YES.getValue())
 		) <= 0) {
-			return Response.fail("物品不存在");
+			return Response.fail("The item does not exist");
 		}
 		Stuff stuff = new Stuff();
 		stuff.setId(stuffId);
@@ -71,7 +71,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		boolean updateStuffSuccess = stuffService.updateById(stuff);
 		log.info("a stuff updated: {}", stuff);
 		if (!updateStuffSuccess) {
-			return Response.fail("更新物品失败");
+			return Response.fail("Failed to update the item");
 		}
 		// insert item
 		Item item = new Item();
@@ -99,7 +99,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 						.eq(Item::getMark, EnableEnum.YES.getValue())
 		);
 		if(item == null) {
-			return Response.fail("租用项不存在");
+			return Response.fail("The rental record does not exist");
 		}
 		Item updateItem = new Item();
 		updateItem.setId(itemId);
@@ -107,7 +107,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		updateItem.setMark(false);
 		boolean updateItemSuccess = this.updateById(updateItem);
 		if(!updateItemSuccess) {
-			return Response.fail("更新租用项失败");
+			return Response.fail("Failed to update the rental record");
 		}
 		log.info("an item updated: {}", updateItem);
 		Stuff updateStuff = new Stuff();
@@ -116,7 +116,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		updateStuff.setUpdateUserId(userId);
 		boolean updateStuffSuccess = stuffService.updateById(updateStuff);
 		if(!updateStuffSuccess) {
-			return Response.fail("更新物品失败");
+			return Response.fail("Failed to update the item");
 		}
 		log.info("a stuff updated: {}", updateStuff);
 		return Response.SUCCESS;
@@ -132,11 +132,11 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 
 	public Response patchStatus(Integer itemId, Integer status, int userId) {
 		if (ItemStatusEnum.APPLYING.getValue().equals(status)) {
-			return Response.fail("更新租用项状态，状态错误");
+			return Response.fail("Cannot update the rental record because the target status is invalid");
 		}
 		Item item = this.getById(itemId);
 		if (item == null) {
-			return Response.fail("租用项不存在");
+			return Response.fail("The rental record does not exist");
 		}
 		LocalDateTime now = LocalDateTime.now();
 		Item updateItem = new Item();
@@ -155,7 +155,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		}
 		boolean updateItemSuccess = this.updateById(updateItem);
 		if (!updateItemSuccess) {
-			return Response.fail("更新租用项失败");
+			return Response.fail("Failed to update the rental record");
 		}
 		log.info("an item updated: {}", updateItem);
 		Stuff updateStuff = new Stuff();
@@ -173,7 +173,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		updateStuff.setUpdateUserId(userId);
 		boolean updateStuffSuccess = stuffService.updateById(updateStuff);
 		if (!updateStuffSuccess) {
-			return Response.fail("更新物品失败");
+			return Response.fail("Failed to update the item");
 		}
 		log.info("a stuff updated: {}", updateStuff);
 		return Response.SUCCESS;

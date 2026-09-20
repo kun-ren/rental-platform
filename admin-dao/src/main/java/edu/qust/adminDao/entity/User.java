@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 用户表
+ * User table
  *
  */
 @Data
@@ -17,12 +17,12 @@ import lombok.experimental.Accessors;
 public class User extends BaseEntity {
 
     /**
-     * 用户名
+     * Username
      */
     private String username;
 
     /**
-     * 密码
+     * Password
      */
     private String password;
 

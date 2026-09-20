@@ -41,7 +41,7 @@ spring:
   http:
     log-request-details: true
 mail:
-  senderName: rent租赁
+  senderName: rent Rental
 
 server:
   port: 9999
@@ -82,7 +82,7 @@ kaptcha:
   textproducerCharLength: 4
   textproducerFontSize: 35
   textproducerFontColor: blue
-  textproducerFontNames: 宋体,楷体,微软雅黑
+  textproducerFontNames: Arial,Verdana,Tahoma
 
 alipay:
   appId: 9021000122693035

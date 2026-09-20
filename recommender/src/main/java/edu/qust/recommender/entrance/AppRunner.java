@@ -42,7 +42,7 @@ public class AppRunner implements ApplicationRunner {
         //itemCFRecommender.recommender();
 
         onlineRecommender.recommend();
-        System.out.println("结束");
+        System.out.println("Finished");
 
     }
 }

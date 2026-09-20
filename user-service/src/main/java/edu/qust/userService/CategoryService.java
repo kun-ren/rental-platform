@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 类别 service
+ * Category service
  *
  */
 @Slf4j
@@ -69,7 +69,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	}
 
 	/**
-	 * 添加类别
+	 * Add Category
 	 *
 	 * @param categoryParam categoryParam
 	 * @return Response
@@ -93,13 +93,13 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	}
 
 	/**
-	 * 修改类别
+	 * Update a category
 	 *
 	 * @param categoryParam categoryParam
 	 * @return Response
 	 */
 	public Response modify(CategoryParam categoryParam) {
-		final String categoryIdErrorMsg = "类别编号非法操作，否则请联系管理员";
+		final String categoryIdErrorMsg = "Invalid category ID operation. Contact an administrator if the problem persists";
 		if (categoryParam.getId() == null) {
 			return Response.fail(categoryIdErrorMsg);
 		}
@@ -115,9 +115,9 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 				.on(categoryParam.getLevel(), new ValidatorHandler<Integer>() {
 					@Override
 					public boolean validate(ValidatorContext context, Integer level) {
-						// 校验不能降级(父类别级别要比自己原本级别小)
+						// Prevent moving a category below its original level
 						if (level > originCategory.getLevel()) {
-							context.addError(ValidationError.create("级别不能降级"));
+							context.addError(ValidationError.create("The category level cannot be lowered"));
 							return false;
 						}
 						return true;
@@ -142,7 +142,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 						.eq(Category::getMark, EnableEnum.YES.getValue())
 		);
 		if (category == null) {
-			return Response.fail("不存在该类别");
+			return Response.fail("The category does not exist");
 		}
 		Set<Integer> deleteIdSet = new HashSet<>();
 		deleteIdSet.add(id);

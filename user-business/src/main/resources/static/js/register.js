@@ -43,17 +43,17 @@ window.onload = function () {
         usernameObject.onkeyup = function () {
             functions.blurInputBack(this, "0px 0px");
             var thisValue = this.value;
-            //非空,不能有空格
+            //Required and cannot contain spaces
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0 || thisValue.indexOf(" ") !== -1) {
-                functions.showWrongSpanAndMessage(this, "此处不能留空");
+                functions.showWrongSpanAndMessage(this, "This field is required");
                 usernameValid = false;
-                // 5-15个字符
+                // 5-15 characters
             } else if (thisValue.length < 5 || thisValue.length > 15) {
-                functions.showWrongSpanAndMessage(this, "长度应为5-15个字符，请勿包含姓名/身份证/银行卡等隐私信息");
+                functions.showWrongSpanAndMessage(this, "Length must be 5-15 characters. Do not include names, identity numbers, bank card numbers, or other private information");
                 usernameValid = false;
-                // 仅中、英文字母（不区分大小写）、数字和下划线
+                // Chinese or English letters, digits, and underscores only
             } else if (/^[0-9a-zA-Z\u4e00-\u9fa5_]{5,15}$/.test(thisValue) === false) {
-                functions.showWrongSpanAndMessage(this, "用户名仅支持中英文、数字和下划线");
+                functions.showWrongSpanAndMessage(this, "The username may contain Chinese or English letters, digits, and underscores");
                 usernameValid = false;
             } else {
                 usernameValid = true;
@@ -75,21 +75,21 @@ window.onload = function () {
         passwordObject.onkeyup = passwordObject.onblur = function () {
             functions.focusInputBack(this, "-325px 0px");
             var thisValue = this.value;
-            //不能全为空格，首尾允许有空格
+            //Cannot consist only of spaces; leading and trailing spaces are allowed
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "此处不能留空");
+                functions.showWrongSpanAndMessage(this, "This field is required");
                 passwordValid = false;
-                //6~16个字符
+                //6-16 characters
             } else if (thisValue.length < 6 || thisValue.length > 16) {
-                functions.showWrongSpanAndMessage(this, "长度应为6-16个字符");
+                functions.showWrongSpanAndMessage(this, "Length must be 6-16 characters");
                 passwordValid = false;
-                //仅字母（区分大小写）、数字及英文标点
+                //Letters, digits, and ASCII punctuation only
             } else if (/^[0-9a-zA-Z\u4e00-\u9fa5_]{6,16}$/.test(thisValue) === false) {
-                functions.showWrongSpanAndMessage(this, "密码仅支持字母、数字及标点符号");
+                functions.showWrongSpanAndMessage(this, "The password may contain letters, digits, and punctuation");
                 passwordValid = false;
             } else if (thisValue !== functions.aInputs[2].value) {
                 firstPassword = thisValue;
-                functions.showWrongSpanAndMessage(confirmedPasswordObject, "两个密码不匹配");
+                functions.showWrongSpanAndMessage(confirmedPasswordObject, "The passwords do not match");
                 functions.showRightSpan(this);
                 functions.resetOutline(this);
                 passwordValid = false;
@@ -114,10 +114,10 @@ window.onload = function () {
             functions.focusInputBack(this, "-325px 0px");
             var thisValue = this.value;
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "此处不能留空");
+                functions.showWrongSpanAndMessage(this, "This field is required");
                 confirmedPasswordValid = false;
             } else if (firstPassword !== thisValue) {
-                functions.showWrongSpanAndMessage(this, "两个密码不匹配");
+                functions.showWrongSpanAndMessage(this, "The passwords do not match");
                 confirmedPasswordValid = false;
             } else {
                 functions.showRightSpanAndHideMessage(this);
@@ -138,19 +138,19 @@ window.onload = function () {
         emailObject.onkeyup = emailObject.onblur = function () {
             functions.focusInputBack(this, "-650px 0px");
             var thisValue = this.value;
-            // 非空
+            // Required
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "此处不能留空");
+                functions.showWrongSpanAndMessage(this, "This field is required");
                 emailValid = false;
-                // 邮箱长度不超过50
+                // Email length cannot exceed 50 characters
             } else if (thisValue.length > 50) {
-                functions.showWrongSpanAndMessage(this, "邮箱长度不能超过50");
+                functions.showWrongSpanAndMessage(this, "The email address cannot exceed 50 characters");
                 emailValid = false;
-                // 邮箱格式验证
+                // Validate the email format
             } else if (functions.checkEmailFormat(thisValue) === false) {
-                functions.showWrongSpanAndMessage(this, "邮箱格式不符合要求");
+                functions.showWrongSpanAndMessage(this, "The email address format is invalid");
                 emailValid = false;
-                // 不能与已有邮箱重复
+                // Must not duplicate an existing email address
             } else {
                 emailValid = true;
             }
@@ -171,15 +171,15 @@ window.onload = function () {
         emailCaptchaObject.onkeyup = emailCaptchaObject.onblur = function () {
             functions.focusInputBack(this, "-975px 0px");
             var thisValue = this.value;
-            //非空
+            //Required
             if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "此处不能留空");
+                functions.showWrongSpanAndMessage(this, "This field is required");
                 emailCaptchaValid = false;
             } else if (thisValue.length !== 6) {
-                functions.showWrongSpanAndMessage(this, "验证码长度为6位");
+                functions.showWrongSpanAndMessage(this, "The verification code must contain six characters");
                 emailCaptchaValid = false;
             } else if (/^[0-9a-zA-Z]+$/.test(thisValue) === false) {
-                functions.showWrongSpanAndMessage(this, "验证码只能包括字母或数字");
+                functions.showWrongSpanAndMessage(this, "The verification code may contain only letters or digits");
                 emailCaptchaValid = false;
             } else {
                 functions.showRightSpanAndHideMessage(this);
@@ -197,7 +197,7 @@ window.onload = function () {
 
     //----------------------------------------
 
-    // 检查用户名是否存在
+    // Check whether the username exists
     usernameObject.onblur = function () {
         //check before send
         if (!usernameValid) {
@@ -221,7 +221,7 @@ window.onload = function () {
         });
     };
 
-    // 发送邮箱验证码
+    // Send the email verification code
     let codebutton = document.getElementById("codebutton");
     codebutton.onclick = () => {
         // check valid
@@ -235,7 +235,7 @@ window.onload = function () {
                 console.log(data);
                 if (data.code === RESPONSE_CODE.SUCCESS) {
                     emailNotExist = true;
-                    functions.showRightSpanAndMessage(emailObject, "验证码已发送，请查看并填写");
+                    functions.showRightSpanAndMessage(emailObject, "The verification code was sent. Check your email and enter it here");
                 } else {
                     emailNotExist = false;
                     functions.showWrongSpanAndMessage(emailObject, data.message);
@@ -245,7 +245,7 @@ window.onload = function () {
         });
     };
 
-    // 注册
+    // Register
     $('#submitbutton').click(function () {
         $.ajax('/users', {
             data: JSON.stringify({

@@ -1,7 +1,7 @@
 package edu.qust.common.exception;
 
 /**
- * 资源不存在异常
+ * Resource-not-found exception
  *
  */
 public class ResourceNotFoundException extends BusinessException {

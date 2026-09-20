@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 用户表 service
+ * User table service
  *
  */
 @Slf4j

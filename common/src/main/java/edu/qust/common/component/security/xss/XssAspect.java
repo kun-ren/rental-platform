@@ -12,7 +12,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.lang.reflect.Method;
 
 /**
- * Xss切面
+ * XSS aspect
  *
  */
 @Aspect
@@ -26,18 +26,18 @@ public class XssAspect {
 
 
 	/**
-	 * Xss切面方法
+	 * XSS aspect advice
 	 *
 	 * <pre>
-	 * 所有BaseVO子类种的'String getXxx()'或'String[] getXxx()'被调用时拦截，做html转义处理
-	 * 如果方法有@MuteXss注解，则不处理
+	 * Intercept String and String-array getters on BaseVO subclasses and apply HTML escaping
+	 * Skip methods annotated with @MuteXss
 	 * </pre>
 	 *
 	 * @param joinPoint joinPoint
 	 * @throws Throwable Throwable
 	 */
-	//你要看什么
-	//不生效
+	//Inspection placeholder
+	//Not effective
 	//@Around("within(edu.qust.common.base.BaseVO+) &&(execution(public String *.get*(..)) || execution(public String[] *.get*(..)))")
 	//@Around("within(edu.qust.common.base.BaseVO+) &&(execution( * get*(..)))")
 	@Before("enableXss()")
@@ -55,7 +55,7 @@ public class XssAspect {
 			}
 		}
 		if ( ! origin.equals(stuffParam) ) {
-			throw new ContentIllegalException("含有非法字符");
+			throw new ContentIllegalException("Contains invalid characters");
 		}
 		return ;
 	}

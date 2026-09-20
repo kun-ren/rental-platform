@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 租用项后台管理
+ * Rental administration
  *
  */
 @Slf4j
@@ -32,7 +32,7 @@ public class ItemController extends BaseController {
 	private CategoryServiceApi categoryServiceApi;
 
 	/**
-	 * 跳转到租用项列表首页
+	 * Open the rental-list page
 	 *
 	 * @return page
 	 */
@@ -46,7 +46,7 @@ public class ItemController extends BaseController {
 	@PatchMapping("/{id}/status/{status}")
 	public Response patchStatus(@PathVariable Integer id, @PathVariable Integer status) {
 		log.info("patch item status, id={}, status={}", id, status);
-		// 获取当前用户ID
+		// Get the current userID
 		final int userId = -1;
 		return itemServiceApi.patchStatus(id, status,userId);
 	}

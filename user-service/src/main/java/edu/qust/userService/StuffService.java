@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 物品 service
+ * Item service
  *
  */
 @Slf4j
@@ -106,7 +106,7 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 						.eq(Stuff::getId, stuffId)
 						.eq(Stuff::getMark, EnableEnum.YES.getValue())
 		) <= 0) {
-			return Response.fail("物品不存在");
+			return Response.fail("The item does not exist");
 		}
 		Stuff stuff = new Stuff();
 		stuff.setId(stuffId);
@@ -124,9 +124,9 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 	/**
 	 * find by name and description and categoryId
 	 *
-	 * @param name       物品名称
-	 * @param desc       物品描述
-	 * @param categoryId 类别ID
+	 * @param name       Item Name
+	 * @param desc       Item description
+	 * @param categoryId Category ID
 	 * @return StuffSearchVO StuffSearchVO
 	 */
 	public List<StuffSearchVO> searchByCategoryAndNameAndDesc(Integer categoryId, String name, String desc) {

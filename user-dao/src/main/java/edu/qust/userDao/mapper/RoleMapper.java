@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import edu.qust.userDao.entity.Role;
 
 /**
- * 角色 Mapper
+ * Role mapper
  *
  */
 public interface RoleMapper extends BaseMapper<Role> {

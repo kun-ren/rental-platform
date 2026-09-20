@@ -1,7 +1,7 @@
 package edu.qust.common.exception;
 
 /**
- * 资源已存在异常
+ * Resource-already-exists exception
  *
  */
 public class ResourceAlreadyExistsException extends BusinessException {

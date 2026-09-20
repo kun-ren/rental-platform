@@ -18,7 +18,7 @@ public class CategorySelectApiDTO implements Serializable {
 	private Integer id;
 
 	/**
-	 * 类别名称
+	 * Category Name
 	 */
 	private String name;
 }

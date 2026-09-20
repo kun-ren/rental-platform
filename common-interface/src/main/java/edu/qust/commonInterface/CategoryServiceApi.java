@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface CategoryServiceApi {
 	/**
-	 * 获取所有类别信息
+	 * Get all category information
 	 *
 	 * @return CategoryApiDTO list
 	 */
 	List<CategoryApiDTO> listCategoryApiDTO();
 
 	/**
-	 * 添加类别
+	 * Add Category
 	 *
 	 * @param categoryApiParam categoryApiParam
 	 * @return common.base.Response
@@ -28,7 +28,7 @@ public interface CategoryServiceApi {
 	Response add(CategoryApiParam categoryApiParam);
 
 	/**
-	 * 修改类别
+	 * Update a category
 	 *
 	 * @param categoryApiParam categoryApiParam
 	 * @return common.base.Response

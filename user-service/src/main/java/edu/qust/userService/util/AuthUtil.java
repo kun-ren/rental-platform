@@ -5,17 +5,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * 认证授权工具
+ * Authentication and authorization utilities
  *
  */
 public class AuthUtil {
 	/**
-	 * 登出URL
+	 * Log outURL
 	 */
 	public static final String LOGOUT_URL = "/logout";
 
 	/**
-	 * 是否拥有ROOT角色
+	 * Whether the user has the ROOT role
 	 *
 	 * @param authentication authentication
 	 * @return true: has root role

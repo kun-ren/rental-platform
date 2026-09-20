@@ -4,26 +4,26 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 菜单DTO
+ * Menu DTO
  *
  */
 @Data
 @Accessors(chain = true)
 public class MenuDTO {
 	/**
-	 * 菜单ID
+	 * Menu ID
 	 */
 	private Integer id;
 	/**
-	 * 父ID，根菜单pid为0
+	 * Parent ID; root menus use pid 0
 	 */
 	private Integer pid;
 	/**
-	 * 菜单名称
+	 * Menu name
 	 */
 	private String name;
 	/**
-	 * 菜单URL
+	 * Menu URL
 	 */
 	private String url;
 }

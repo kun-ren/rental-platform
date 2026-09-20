@@ -1,26 +1,26 @@
 package edu.qust.userService.validator.auth;
 
 /**
- * 认证校验分组
+ * Authentication validation groups
  *
  */
 public class AuthValidatorGroup {
 	/**
-	 * 注册
+	 * Register
 	 *
 	 */
 	public interface Register {
 	}
 
 	/**
-	 * 发送邮件验证码
+	 * Send an email verification code
 	 *
 	 */
 	public interface SendEmailCaptcha {
 	}
 
 	/**
-	 * 重置密码
+	 * Reset Password
 	 *
 	 */
 	public interface ResetPassword {

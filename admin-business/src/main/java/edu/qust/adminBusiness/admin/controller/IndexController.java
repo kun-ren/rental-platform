@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 基础控制器
+ * Base controller
  *
  */
 @Slf4j
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
 	/**
-	 * 首页
+	 * Home page
 	 *
 	 * @return java.lang.String
 	 */

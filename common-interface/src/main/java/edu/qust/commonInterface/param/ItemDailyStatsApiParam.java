@@ -6,26 +6,26 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * 租用项日统计 api param
+ * Daily rental statistics API parameter
  *
  */
 @Data
 @Accessors(chain = true)
 public class ItemDailyStatsApiParam implements Serializable {
 	/**
-	 * 开始创建日期
+	 * Start creation date
 	 */
 	private String beginAddDate;
 	/**
-	 * 结束创建日期
+	 * End creation date
 	 */
 	private String endAddDate;
 	/**
-	 * 类别ID
+	 * Category ID
 	 */
 	private Integer categoryId;
 	/**
-	 * 状态
+	 * Status
 	 */
 	private Integer status;
 }

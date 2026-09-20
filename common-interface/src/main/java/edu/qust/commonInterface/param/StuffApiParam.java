@@ -17,37 +17,37 @@ public class StuffApiParam implements Serializable {
     private Integer categoryId;
 
     /**
-     * 物品名称
+     * Item Name
      */
     private String name;
 
     /**
-     * 物品描述
+     * Item description
      */
     private String description;
 
     /**
-     * 押金(rmb)
+     * Deposit(rmb)
      */
     private BigDecimal deposit;
 
     /**
-     * 租金（rmb/day）
+     * Rental (RMB/day)
      */
     private BigDecimal rental;
 
     /**
-     * 物品状态（0:未租；1:申请租用；2:已租;3:不出租）
+     * Item status (0: available; 1: application pending; 2: rented; 3: not offered)
      */
     private Integer status;
 
     /**
-     * 图片id
+     * Image ID
      */
     private String pictureId;
 
     /**
-     * 物品所有者ID
+     * Item owner ID
      */
     private Integer userId;
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.qust.userDao.mapper.ResourceMapper">
 
-    <!-- 通用查询映射结果 -->
+    <!-- Common query result mapping -->
     <resultMap id="BaseResultMap" type="edu.qust.userDao.entity.Resource">
     <result column="id" property="id" />
     <result column="add_user_id" property="addUserId" />
@@ -16,7 +16,7 @@
         <result column="method" property="method" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
+    <!-- Common query result columns -->
     <sql id="Base_Column_List">
         id,
         add_user_id,

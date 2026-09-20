@@ -5,33 +5,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 角色枚举
+ * Role enum
  *
  */
 public enum RoleEnum {
 	/**
-	 * ROOT用户
+	 * ROOT user
 	 */
 	ROOT(1, "ROOT"),
 	/**
-	 * 出租人
+	 * Lessor
 	 */
 	LESSOR(2, "LESSOR"),
 	/**
-	 * 承租人
+	 * Lessee
 	 */
 	LESSEE(3, "LESSEE"),
 	/**
-	 * 游客用户
+	 * Guest user
 	 */
 	GUEST(4, "GUEST");
 
 	/**
-	 * 角色ID
+	 * Role ID
 	 */
 	private int id;
 	/**
-	 * 角色名称
+	 * Role name
 	 */
 	private String name;
 

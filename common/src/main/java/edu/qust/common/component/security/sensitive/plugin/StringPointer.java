@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 /**
- * 没有注释的方法与{@link String}类似<br/>
- * <b>注意：</b>没有（数组越界等的）安全检查<br/>
- * 可以作为{@link HashMap}和{@link TreeMap}的key
+ * Undocumented methods behave like {@link String}<br/>
+ * <b>Note:</b> no bounds or other safety checks are performed<br/>
+ * Can be used as a key in {@link HashMap} and {@link TreeMap}
  *
  */
 public class StringPointer implements Serializable, CharSequence, Comparable<StringPointer> {
@@ -35,39 +35,39 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	}
 
 	/**
-	 * 计算该位置后（包含）2个字符的hash值
+	 * Calculate the hash of the two characters starting at this position
 	 *
-	 * @param i 从 0 到 length - 2
-	 * @return hash值
+	 * @param i From 0 to length - 2
+	 * @return Hash value
 	 */
 	public int nextTwoCharHash(int i) {
 		return 31 * value[offset + i] + value[offset + i + 1];
 	}
 
 	/**
-	 * 计算该位置后（包含）2个字符和为1个int型的值<br/>
-	 * int值相同表示2个字符相同
+	 * Combine the two characters starting at this position into one int value<br/>
+	 * Equal int values indicate equal character pairs
 	 *
-	 * @param i 从 0 到 length - 2
-	 * @return int值
+	 * @param i From 0 to length - 2
+	 * @return Integer value
 	 */
 	public int nextTwoCharMix(int i) {
 		return (value[offset + i] << 16) | value[offset + i + 1];
 	}
 
 	/**
-	 * 该位置后（包含）的字符串，是否以某个词（word）开头
+	 * Whether the substring starting here begins with the supplied word
 	 *
-	 * @param i    从 0 到 length - 2
-	 * @param word 词
-	 * @return 是否？
+	 * @param i    From 0 to length - 2
+	 * @param word Word to test
+	 * @return Whether it matches
 	 */
 	public boolean nextStartsWith(int i, StringPointer word) {
-		// 是否长度超出
+		// Check whether the range exceeds the length
 		if (word.length > length - i) {
 			return false;
 		}
-		// 从尾开始判断
+		// Compare from the end
 		for (int c = word.length - 1; c >= 0; c--) {
 			if (value[offset + i + c] != word.value[word.offset + c]) {
 				return false;
@@ -77,11 +77,11 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	}
 
 	/**
-	 * 填充（替换）
+	 * Fill (replace)
 	 *
-	 * @param begin    从此位置开始（含）
-	 * @param end      到此位置结束（不含）
-	 * @param fillWith 以此字符填充（替换）
+	 * @param begin    Start at this position, inclusive
+	 * @param end      End at this position, exclusive
+	 * @param fillWith Fill the range with this replacement character
 	 */
 	public void fill(int begin, int end, char fillWith) {
 		for (int i = begin; i < end; i++) {

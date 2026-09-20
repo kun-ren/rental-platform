@@ -1,8 +1,8 @@
 package edu.qust.recommender.statistics;
 
-//历史热门表  RateMoreProducts
-//近期热门统计 RateMoreRecentlyProducts
-//每个商品的平均评分表  AverageScoreProducts
+//Historical popularity table  RateMoreProducts
+//Recent popularity statistics RateMoreRecentlyProducts
+//Average product rating table  AverageScoreProducts
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -37,15 +37,15 @@ public class StatisticsRecommender {
                 e -> BeanUtil.map(e, ProductRating.class)
         ).collect(Collectors.toList());
         Dataset<Row> ratingDF = sparkSession.createDataFrame(ratingList,ProductRating.class);
-        //创建ratings临时表
+        //Create the ratings temporary view
         ratingDF.createOrReplaceTempView("ratings");
         ratingDF.cache();
-        //1. 历史热门商品， 按照评分个数统计
+        //1. Historical popularity ordered by rating count
         Dataset<Row> rateMoreProductsDF = sparkSession.sql(
                 "select productId, count(productId) as count " +
                         "from ratings group by productId order by count desc");
         rateMoreProductsDF.cache();
-        // 写入表 redis 代替
+        // Write to Redis instead of a database table
         rateMoreProductsDF.show();
         List<Integer> hotProductId = new ArrayList<>();
         rateMoreProductsDF.collectAsList().forEach( e -> {
@@ -53,27 +53,27 @@ public class StatisticsRecommender {
             hotProductId.add(i);
         });
         redisTemplate.opsForList().leftPushAll("historicalHot",hotProductId);
-        //2. 近期热门商品统计。 时间戳转换为yyMM格式进行评分统计
-        //自定义函数  //入参为Integer
+        //2. Calculate recent popularity by converting timestamps to year-month values
+        //Custom function that accepts an Integer
         sparkSession.udf().register("changeDate",new changeDateUDF(), DataTypes.StringType);
 
         Dataset<Row> ratingOfYearMonDF = sparkSession.sql(
                 "select productId, score, changeDate(timestamp) as yearmonth from ratings");
-        //创建临时表
+        //Create a temporary view
         ratingOfYearMonDF.createOrReplaceTempView("ratingOfMonth");
         Dataset<Row> rateMoreRecentlyProductsDF = sparkSession.sql(
                 "select productId, count(productId) as count, yearmonth " +
                         "from ratingOfMonth group by yearmonth, productId " +
                         "order by yearmonth desc, count desc");
-        //TODO 把DF写入mysql
+        //TODO Write the DataFrame to MySQL
         /*List<Integer> recentlyHotProductId =rateMoreRecentlyProductsDF.toJavaRDD().map( e -> e.getInt(1)).collect();
         redisTemplate.opsForList().leftPushAll("historialHot",);*/
 
-        //3. 优质商品统计，商品的平均评分
+        //3. Rank high-quality products by average rating
         Dataset<Row> averageProductsDF = sparkSession.sql(
                 "select productId, avg(score) as avg " +
                         "from ratings group by productId order by avg desc");
-        //TODO  写入数据库
+        //TODO  Write to the database
 
         List<Integer> highRatingProductId = new ArrayList<>();
                 averageProductsDF.collectAsList().forEach(

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * WebSocket 聊天服务端
+ * WebSocket Chat server
  *
  */
 @Slf4j
@@ -20,13 +20,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketChatServer {
 
 	/**
-	 * 全部在线会话  PS: 基于场景考虑 这里使用线程安全的Map存储会话对象。
+	 * All active sessions  PS: Use a thread-safe map to store sessions
 	 */
 	private static Map<String, Session> onlineSessions = new ConcurrentHashMap<>();
 
 
 	/**
-	 * 当客户端打开连接：1.添加会话对象 2.更新在线人数
+	 * When a client connects: add its session and update the online count
 	 */
 	@OnOpen
 	public void onOpen(Session session) {
@@ -35,9 +35,9 @@ public class WebSocketChatServer {
 	}
 
 	/**
-	 * 当客户端发送消息：1.获取它的用户名和消息 2.发送消息给所有人
+	 * When a client sends a message: read the username and message, then broadcast it
 	 * <p>
-	 * PS: 这里约定传递的消息为JSON字符串 方便传递更多参数！
+	 * PS: Messages use JSON so they can carry additional fields.
 	 */
 	@OnMessage
 	public void onMessage(Session session, String jsonStr) throws IOException {
@@ -47,7 +47,7 @@ public class WebSocketChatServer {
 	}
 
 	/**
-	 * 当关闭连接：1.移除会话对象 2.更新在线人数
+	 * When a client disconnects: remove its session and update the online count
 	 */
 	@OnClose
 	public void onClose(Session session) {
@@ -56,7 +56,7 @@ public class WebSocketChatServer {
 	}
 
 	/**
-	 * 当通信发生异常：打印错误日志
+	 * Log communication errors
 	 */
 	@OnError
 	public void onError(Session session, Throwable error) {
@@ -64,7 +64,7 @@ public class WebSocketChatServer {
 	}
 
 	/**
-	 * 公共方法：发送信息给所有人
+	 * Broadcast a message to every connected client
 	 */
 	private static void sendMessageToAll(String msg) {
 		onlineSessions.forEach((id, session) -> {

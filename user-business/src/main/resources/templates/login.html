@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>登录页面</title>
+    <title>Login</title>
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
     <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
@@ -13,9 +13,9 @@
 </head>
 <body>
 <!--[if lte IE8]>
-<p>浏览器版本太低，请
-    <a target="_blank" href="http://www.browsehappy.com">升级</a>
-    为最新的ie浏览器！
+<p>Your browser is outdated. Please
+    <a target="_blank" href="http://www.browsehappy.com">upgrade</a>
+    to a current browser version.
 </p>
 <![endif]-->
 <div class="ct-container col-md-12">
@@ -24,13 +24,13 @@
         <div class="paper-content">
             <header class="paper-header">
                 <span th:if="${param.error == null and param.logout == null and captchaErrorMsg == null}">
-                    登录
+                    Log In
                 </span>
                 <span th:if="${param.error}">
-                    用户名或密码错误
+                    Incorrect username or password
                 </span>
                 <span th:if="${param.logout}">
-                    您已退出
+                    You have logged out
                 </span>
                 <span th:if="${captchaErrorMsg}" th:utext="${captchaErrorMsg}"></span>
             </header>
@@ -39,47 +39,47 @@
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px">
                         <div class="user-div">
-                            <input name="username" id="accountName" type="text" placeholder="用户名/邮箱">
+                            <input name="username" id="accountName" type="text" placeholder="Username/Email">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="password-div">
                             <input name="password" autocomplete="on" id="password" type="password"
-                                   placeholder="密码">
+                                   placeholder="Password">
                         </div>
                         <span class=""></span>
                     </li>
                     <li>
                         <div class="code-div">
-                            <input name="captcha" type="text" id="captcha" placeholder="验证码">
+                            <input name="captcha" type="text" id="captcha" placeholder="CAPTCHA">
                         </div>
                         <div class="code-image">
-                            <img src="" alt="验证码" id="captchaImage">
+                            <img src="" alt="CAPTCHA" id="captchaImage">
                         </div>
                     </li>
                     <li>
                         <button type="submit" disabled="disabled"
                                 class="button button-caution button-box button-raised button-giant" id="submitbutton">
-                            <i class="fa">登录</i>
+                            <i class="fa">Log In</i>
                         </button>
                         <button type="reset" class="button button-caution button-box button-raised button-giant"
                                 id="resetbutton">
-                            <i class="fa">重置</i>
+                            <i class="fa">Reset</i>
                         </button>
                     </li>
 
                     <li class="alert-box">
                         <input type="checkbox" checked="checked" id="remember-me" name="remember-me"/>
                         <label for="remember-me"></label>
-                        <p>记住密码</p>
+                        <p>Remember Password</p>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="forgetPwdBtn">
-                            <i class="fa">忘记密码</i>
+                            <i class="fa">Forgot Password</i>
                         </button>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="registerBtn">
-                            <i class="fa">注册</i>
+                            <i class="fa">Register</i>
                         </button>
                     </li>
                 </ul>
@@ -91,7 +91,7 @@
     <footer class="share-footer col-md-12"></footer>
 
     <div class="error-box" id="error-box">
-        <p class="error-info" id="error-info">出错了</p>
+        <p class="error-info" id="error-info">An error occurred</p>
     </div>
 </div>
 </body>

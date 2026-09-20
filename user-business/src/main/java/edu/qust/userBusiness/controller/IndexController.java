@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 /**
- * 基础控制器
+ * Base controller
  *
  */
 @Slf4j
@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
 	/**
-	 * 首页
+	 * Home page
 	 *
 	 * @return java.lang.String
 	 */
 	@GetMapping
 	public String index(Model model, HttpSession session) {
-		// 获取菜单
+		// Get menus
 		model.addAttribute("menuVOList", session.getAttribute(WebConstant.Session.MENU_VO_LIST_SESSION_KEY));
 		return "index";
 	}

@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	private CategoryService categoryService;
 
 	/**
-	 * 获取所有类别信息
+	 * Get all category information
 	 *
 	 * @return CategoryApiDTO list
 	 */
@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	}
 
 	/**
-	 * 添加类别
+	 * Add Category
 	 *
 	 * @param categoryApiParam categoryApiParam
 	 * @return common.base.Response
@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	}
 
 	/**
-	 * 修改类别
+	 * Update a category
 	 *
 	 * @param categoryApiParam categoryApiParam
 	 * @return common.base.Response

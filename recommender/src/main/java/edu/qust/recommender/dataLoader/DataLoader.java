@@ -32,8 +32,8 @@ public class DataLoader {
     @Reference
     private StuffServiceApi stuffServiceApi;
 
-    String PRODUCT_DATA_PATH = "D:\\课程\\javaee\\RentalPlatform\\RentalPlatform\\rental-platform\\recommender\\src\\main\\resources\\products.csv";
-    String RATING_DATA_PATH = "D:\\课程\\javaee\\RentalPlatform\\RentalPlatform\\rental-platform\\recommender\\src\\main\\resources\\ratings.csv";
+    String PRODUCT_DATA_PATH = "src/main/resources/products.csv";
+    String RATING_DATA_PATH = "src/main/resources/ratings.csv";
 
     public boolean readProductCSVData(){
         System.out.println(javaSparkContext);

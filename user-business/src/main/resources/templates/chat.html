@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>聊天</title>
+    <title>Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/plugins/mdui-v0.4.2/css/mdui.min.css}">
 </head>
@@ -10,7 +10,7 @@
 <div class="mdui-container">
     <div class="mdui-toolbar mdui-color-theme">
         <a class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-        <span class="mdui-typo-title">rent聊天室</span>
+        <span class="mdui-typo-title">rent Chat Room</span>
         <div class="mdui-toolbar-spacer"></div>
         <a class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
     </div>
@@ -24,21 +24,21 @@
                 <div class="mdui-col-xs-12 mdui-col-sm-10">
                     <div class="mdui-textfield-floating-label" style="margin-top:15px">
                         <i class="mdui-icon" id="username" th:text="${username}"></i>
-                        <i class="mdui-icon material-icons">，欢迎您</i>
+                        <i class="mdui-icon material-icons">，Welcome</i>
                     </div>
                 </div>
                 <div class="mdui-col-xs-12 mdui-col-sm-10">
                     <div class="mdui-textfield mdui-textfield-floating-label">
                         <i class="mdui-icon material-icons">textsms</i>
-                        <label class="mdui-textfield-label">发送内容</label>
+                        <label class="mdui-textfield-label">Message</label>
                         <input class="mdui-textfield-input" id="msg"/>
                     </div>
                     <div class="mdui-container" style="padding:20px 35px">
                         <button class="mdui-btn mdui-color-theme-accent mdui-ripple"
-                                onclick="sendMsgToServer()">发送
+                                onclick="sendMsgToServer()">Send
                         </button>
                         <button class="mdui-btn mdui-color-theme mdui-ripple"
-                                onclick="clearMsg()">清屏
+                                onclick="clearMsg()">Clear
                         </button>
                     </div>
                 </div>
@@ -48,13 +48,13 @@
                 <div class="mdui-chip">
                     <span class="mdui-chip-icon mdui-color-blue">
                         <i class="mdui-icon material-icons">&#xe420;</i></span>
-                    <span class="mdui-chip-title">聊天内容</span>
+                    <span class="mdui-chip-title">Chat Messages</span>
                 </div>
 
                 <div class="mdui-chip">
                     <span class="mdui-chip-icon mdui-color-blue">
                         <i class="mdui-icon material-icons">face</i></span>
-                    <span class="mdui-chip-title">在线人数</span>
+                    <span class="mdui-chip-title">Users Online</span>
                     <span class="mdui-chip-title chat-num">0</span>
                 </div>
                 <div class="message-container">
@@ -68,31 +68,31 @@
 
 <script th:inline="javascript">
     /**
-     * WebSocket客户端
+     * WebSocket client
      *
-     * 使用说明：
-     * 1、WebSocket客户端通过回调函数来接收服务端消息。例如：webSocket.onmessage
-     * 2、WebSocket客户端通过send方法来发送消息给服务端。例如：webSocket.send();
+     * Usage:
+     * 1. The WebSocket client receives server messages through callbacks, for example webSocket.onmessage.
+     * 2. The WebSocket client sends messages with the send method, for example webSocket.send().
      */
     function getWebSocket() {
         /**
-         * WebSocket客户端 PS：URL开头表示WebSocket协议 中间是域名端口 结尾是服务端映射地址
+         * The URL starts with the WebSocket scheme, followed by host and port, and ends with the server endpoint
          */
         var webSocket = new WebSocket([[${webSocketUrl}]]);
         console.log([[${webSocketUrl}]])
         /**
-         * 当服务端打开连接
+         * When the server opens the connection
          */
         webSocket.onopen = function (event) {
-            console.log('WebSocket打开连接');
+            console.log('WebSocket connection opened');
         };
 
         /**
-         * 当服务端发来消息：1.广播消息 2.更新在线人数
+         * When the server sends a message: broadcast it and update the online-user count
          */
         webSocket.onmessage = function (event) {
-            console.log('WebSocket收到消息：%c' + event.data, 'color:green');
-            //获取服务端消息
+            console.log('WebSocket message received: %c' + event.data, 'color:green');
+            //Read the server message
             var message = JSON.parse(event.data) || {};
             var $messageContainer = $('.message-container');
             //
@@ -104,7 +104,7 @@
                     '</div></div>');
             }
             $('.chat-num').text(message.onlineCount);
-            //防止刷屏
+            //Prevent message flooding
             var $cards = $messageContainer.children('.mdui-card:visible').toArray();
             if ($cards.length > 5) {
                 $cards.forEach(function (item, index) {
@@ -114,17 +114,17 @@
         };
 
         /**
-         * 关闭连接
+         * Close the connection
          */
         webSocket.onclose = function (event) {
-            console.log('WebSocket关闭连接');
+            console.log('WebSocket connection closed');
         };
 
         /**
-         * 通信失败
+         * Communication error
          */
         webSocket.onerror = function (event) {
-            console.log('WebSocket发生异常');
+            console.log('WebSocket error');
 
         };
         return webSocket;
@@ -134,7 +134,7 @@
 
 
     /**
-     * 通过WebSocket对象发送消息给服务端
+     * Send a message to the server through the WebSocket object
      */
     function sendMsgToServer() {
         var $message = $('#msg');
@@ -146,14 +146,14 @@
     }
 
     /**
-     * 清屏
+     * Clear
      */
     function clearMsg() {
         $(".message-container").empty();
     }
 
     /**
-     * 使用ENTER发送消息
+     * Press Enter to send a message
      */
     document.onkeydown = function (event) {
         var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -164,5 +164,3 @@
 <script th:src="@{/plugins/mdui-v0.4.2/js/mdui.min.js}"></script>
 </body>
 </html>
-
-

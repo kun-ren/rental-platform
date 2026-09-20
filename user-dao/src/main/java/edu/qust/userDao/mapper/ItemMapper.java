@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 出租项 Mapper
+ * Rental-record mapper
  *
  */
 public interface ItemMapper extends BaseMapper<Item> {

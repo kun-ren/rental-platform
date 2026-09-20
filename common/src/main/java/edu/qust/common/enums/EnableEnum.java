@@ -1,16 +1,16 @@
 package edu.qust.common.enums;
 
 /**
- * 开关枚举
+ * Enable/disable enum
  *
  */
 public enum EnableEnum {
 	/**
-	 * 肯定
+	 * Yes
 	 */
 	YES(1),
 	/**
-	 * 否定
+	 * No
 	 */
 	NO(0);
 

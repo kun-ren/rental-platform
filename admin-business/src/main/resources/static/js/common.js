@@ -1,4 +1,4 @@
-// 响应代码
+// Response codes
 const RESPONSE_CODE = {
     SUCCESS: 0,
     FAIL: -1

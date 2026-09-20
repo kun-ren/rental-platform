@@ -7,12 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Set;
 
 /**
- * 类别 Mapper
+ * Category mapper
  *
  */
 public interface CategoryMapper extends BaseMapper<Category> {
 
-	//标记删除
+	//Soft-delete
 	void batchDelete(@Param("set") Set<Integer> ids);
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户表 controller
+ * User table controller
  *
  * @author yanganyu
  * @date 2019-01-19

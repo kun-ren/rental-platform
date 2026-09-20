@@ -19,7 +19,7 @@ public class CategorySelectVO extends BaseVO {
 	private Integer id;
 
 	/**
-	 * 类别名称
+	 * Category Name
 	 */
 	private String name;
 }

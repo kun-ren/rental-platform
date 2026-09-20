@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 角色资源关系 service
+ * Role-resource relation service
  *
 
  */
@@ -25,7 +25,7 @@ public class RoleResourceService extends ServiceImpl<RoleResourceMapper, RoleRes
 	private RoleResourceMapper roleResourceMapper;
 
 	/**
-	 * 查询所有资源角色关系，并给所有资源添加和ROOT角色的关系
+	 * Load every role-resource relation and grant ROOT access to all resources
 	 *
 	 * @return RoleResourceDTO list
 	 */

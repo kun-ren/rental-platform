@@ -63,7 +63,7 @@ public class OfflineRecommender implements Serializable {
         log.info(String.valueOf(ratings.size()));
         JavaRDD<ProductRating> ratingRDD = javaSparkContext.parallelize(ratings);
         ratingRDD.cache();
-        //提取出所有用户和商品的数据集
+        //Extract the distinct user and product data sets
         JavaRDD<Integer> userRDD = ratingRDD.map( item -> {
             return item.getUserId();
         }).distinct();
@@ -73,7 +73,7 @@ public class OfflineRecommender implements Serializable {
             return item.getProductId();
         }).distinct();
         productRDD.cache();
-        //1. 隐语义模型
+        //1. Latent-factor model
 
         JavaRDD<Rating> trainData = ratingRDD
                 .map(x -> new Rating(x.getUserId(),x.getProductId(),x.getScore()));
@@ -82,8 +82,8 @@ public class OfflineRecommender implements Serializable {
         int iterations = 10;
         double lambda = 0.01;
         MatrixFactorizationModel model = ALS.train(trainData.rdd(),rank,iterations, lambda );
-        //2. 获得预测评分矩阵
-        //userRDD与ProductRDD 笛卡尔积, 得到空的userProductsRDD
+        //2. Generate the predicted rating matrix
+        //Create candidate user-product pairs with the Cartesian product of userRDD and productRDD
         JavaPairRDD<Integer, Integer> userProduct = userRDD.cartesian(productRDD);
         userProduct.cache();
         JavaRDD<Rating> preRating = model.predict(userProduct);
@@ -126,20 +126,20 @@ public class OfflineRecommender implements Serializable {
         log.info(String.valueOf(userRecsParams.size()));
         userRecsServiceApi.save(userRecsParams);
 
-        //3.利用商品的特征向量，计算商品的相似度
+        //3.Calculate product similarity from product feature vectors
         JavaRDD<Tuple2<Integer, DoubleMatrix>> productFeatures = model.productFeatures().toJavaRDD().map(
                 item ->new Tuple2<>((Integer)item._1, new DoubleMatrix(item._2)));
-        //计算商品余弦相似度
+        //Calculate cosine similarity between products
         JavaRDD<ProductRecs> productRecsRDD
                 = productFeatures.cartesian(productFeatures)
-                .filter( item -> item._1._1 != item._2._1)// 筛选掉笛卡尔积中相同productId的连接
+                .filter( item -> item._1._1 != item._2._1)// Remove Cartesian-product pairs with the same product ID
                 .mapToPair(
                         item ->{
                             double similarity = consinSim(item._1._2, item._2._2);
-                             return new Tuple2<>(item._1._1, new Tuple2<>(item._2._1, similarity));// 返回数据结构为(productID, productId, similarity)
+                             return new Tuple2<>(item._1._1, new Tuple2<>(item._2._1, similarity));// Return (productID, relatedProductId, similarity)
                         }
                 )
-                .filter(item -> item._2._2 > 0.4)  //筛选大于0.4相似度的商品
+                .filter(item -> item._2._2 > 0.4)  //Keep products with similarity greater than 0.4
                 .groupByKey()
                 .map(item -> {
                     List<Recommendation> recs = new ArrayList<>();

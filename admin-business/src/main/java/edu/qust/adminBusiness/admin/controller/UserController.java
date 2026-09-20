@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 
 /**
- * 用户表 controller
+ * User table controller
  *
  */
 @Slf4j

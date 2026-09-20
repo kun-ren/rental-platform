@@ -15,53 +15,53 @@ import javax.validation.constraints.*;
 @Accessors(chain = true)
 public class RegisterParam {
 	/**
-	 * 用户名
+	 * Username
 	 */
-	@NotEmpty(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
-	@Size(min = 5, max = 15, message = "长度应为5-15个字符，请勿包含姓名/身份证/银行卡等隐私信息", groups = AuthValidatorGroup.Register.class)
-	@Pattern(regexp = "[0-9a-zA-Z\u4e00-\u9fa5_]+", message = "用户名仅支持中英文、数字和下划线", groups = AuthValidatorGroup.Register.class)
+	@NotEmpty(message = "This field is required", groups = AuthValidatorGroup.Register.class)
+	@Size(min = 5, max = 15, message = "Length must be 5-15 characters. Do not include names, identity numbers, bank card numbers, or other private information", groups = AuthValidatorGroup.Register.class)
+	@Pattern(regexp = "[0-9a-zA-Z\u4e00-\u9fa5_]+", message = "The username may contain Chinese or English letters, digits, and underscores", groups = AuthValidatorGroup.Register.class)
 	private String username;
 
 	/**
-	 * 邮箱
+	 * Email
 	 */
-	@NotEmpty(message = "此处不能留空", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.SendEmailCaptcha.class})
-	@Size(max = 50, message = "邮箱长度不能超过50",
+	@NotEmpty(message = "This field is required", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.SendEmailCaptcha.class})
+	@Size(max = 50, message = "The email address cannot exceed 50 characters",
 			groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.SendEmailCaptcha.class})
-	@Email(message = "邮箱格式不符合要求", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.SendEmailCaptcha.class})
+	@Email(message = "The email address format is invalid", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.SendEmailCaptcha.class})
 	private String email;
 
 	/**
-	 * 性别(0:女，1:男，2:不愿透露)
+	 * Gender (0: female, 1: male, 2: prefer not to say)
 	 */
-	@NotNull(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
-	@Range(min = 0, max = 2, message = "请选择给定的性别", groups = AuthValidatorGroup.Register.class)
+	@NotNull(message = "This field is required", groups = AuthValidatorGroup.Register.class)
+	@Range(min = 0, max = 2, message = "Select a valid gender", groups = AuthValidatorGroup.Register.class)
 	private Integer sex;
 
 	/**
-	 * 密码
+	 * Password
 	 */
-	@NotBlank(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
-	@Size(min = 6, max = 16, message = "长度应为6-16个字符", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.ResetPassword.class})
-	@Pattern(regexp = "[0-9a-zA-Z\\p{Punct} ”]+", message = "密码仅支持字母、数字及标点符号", groups = AuthValidatorGroup.Register.class)
+	@NotBlank(message = "This field is required", groups = AuthValidatorGroup.Register.class)
+	@Size(min = 6, max = 16, message = "Length must be 6-16 characters", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.ResetPassword.class})
+	@Pattern(regexp = "[0-9a-zA-Z\\p{Punct} ”]+", message = "The password may contain letters, digits, and punctuation", groups = AuthValidatorGroup.Register.class)
 	private String password;
 
 	/**
-	 * 确认密码
+	 * Confirm Password
 	 */
-	@NotBlank(message = "此处不能留空", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.ResetPassword.class})
+	@NotBlank(message = "This field is required", groups = {AuthValidatorGroup.Register.class, AuthValidatorGroup.ResetPassword.class})
 	private String confirmedPassword;
 
 	/**
-	 * 邮箱验证码
+	 * Email Verification Code
 	 */
-	@NotEmpty(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
+	@NotEmpty(message = "This field is required", groups = AuthValidatorGroup.Register.class)
 	private String emailCaptcha;
 
 	/**
-	 * 角色(2:出租人，3:承租人)
+	 * Role (2: Lessor, 3: Lessee)
 	 */
-	@NotNull(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
-	@Range(min = 2, max = 3, message = "请选择给定的性别", groups = AuthValidatorGroup.Register.class)
+	@NotNull(message = "This field is required", groups = AuthValidatorGroup.Register.class)
+	@Range(min = 2, max = 3, message = "Select a valid role", groups = AuthValidatorGroup.Register.class)
 	private Integer role;
 }
