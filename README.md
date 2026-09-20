@@ -1,4 +1,4 @@
-# rent-X Campus Rental Platform
+# Distributed rent-X Campus Rental Platform
 
 rent-X is a multi-module Java rental marketplace for a campus community. Owners can list items, renters can apply for and pay for rentals, administrators can approve rental requests and review daily statistics, and the platform can recommend items from historical and real-time ratings.
 
@@ -73,7 +73,7 @@ total = deposit + (daily rental price x rental days)
 | Validation and mapping | Bean Validation, Fluent Validator, Easy Mapper |
 | Payment and mail | Alipay sandbox SDK, Spring Mail |
 
-## Architecture
+## Distributed Architecture
 
 ```mermaid
 flowchart TB
